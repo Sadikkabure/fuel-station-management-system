@@ -33,8 +33,8 @@ error_reporting(E_ALL);
 <div class="wrapper">
   <header class="main-header">
     <a href="sm_login_home.php" class="logo">
-     <span class="logo-mini"><b>BNL</b></span>      
-      <span class="logo-lg"><b>BUNGEL NIG LTD</b></span>
+     <span class="logo-mini"><b>KBY</b></span>      
+      <span class="logo-lg"><b>Kaburiye & sons NIG LTD</b></span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
