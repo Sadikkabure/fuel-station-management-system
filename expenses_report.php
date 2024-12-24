@@ -29,7 +29,7 @@ $fetch=mysqli_fetch_array($profile);
   <header class="main-header">
     <a href="ahome.php" class="logo">
       <span class="logo-mini"><b>KBY</b></span>      
-      <span class="logo-lg"><b>KABURIYE & SONS NIG LTD</b></span>
+      <span class="logo-lg"><b>Kaburiye & NIG LTD</b></span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -181,8 +181,8 @@ $fetch=mysqli_fetch_array($profile);
       <li >
 
 <li >
-  <a href="m_report.php">
-            <i class="fa fa-files-o"></i> <span>Maintenance Report</span>
+  <!-- <a href="m_report.php">
+            <i class="fa fa-files-o"></i> <span>Maintenance Report</span> -->
             <span class="pull-right-container">
             
             </span>
@@ -284,6 +284,7 @@ else
       
     </div>
   <center>  <strong>Copyright &copy; 2024 by PPMS</strong> All rights reserved.</center>
+  <button onclick="window.print()">PRINT</button>
   </footer>
 
       </div>
