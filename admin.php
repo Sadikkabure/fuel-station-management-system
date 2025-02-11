@@ -2,12 +2,12 @@
 session_start();
 
 if (isset($_POST['submit'])) {
-	require "dbcon.php";
-	$email = mysqli_real_escape_string($connect, $_POST['email']);
+	require __DIR__ . "/config/database.php";
+	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$password = ($_POST['password']);
-	$password = mysqli_real_escape_string($connect, $password);
+	$password = mysqli_real_escape_string($conn, $password);
 	$query = "SELECT * FROM admin where email='$email' AND password='$password'";
-	$user = mysqli_query($connect, $query);
+	$user = mysqli_query($conn, $query);
 	$user_no = mysqli_num_rows($user);
 	if ($user_no == 1) {
 		$user_data = mysqli_fetch_array($user);

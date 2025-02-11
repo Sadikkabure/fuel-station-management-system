@@ -5,9 +5,9 @@ if (!$_SESSION['data']) {
   header("Location:admin.php");
   die();
 }
-require "dbcon.php";
+require __DIR__ . "/config/database.php";
 $user = $_SESSION['data'];
-$profile = mysqli_query($connect, "select * from admin where email='$user'");
+$profile = mysqli_query($conn, "select * from admin where email='$user'");
 $fetch = mysqli_fetch_array($profile);
 ?>
 <!DOCTYPE html>
@@ -40,12 +40,12 @@ $fetch = mysqli_fetch_array($profile);
           <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="images/avatar.png" class="user-image" alt="User Image">
+                <img src="images/admin.jpg" class="user-image" alt="User Image">
                 <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
-                  <img src="images/avatar.png" class="img-circle" alt="User Image">
+                  <img src="images/admin.jpg" class="img-circle" alt="User Image">
                   <p>
                     <?php echo "$fetch[email]"; ?>
                     <small><b>ADMIN</b></small>
@@ -70,7 +70,7 @@ $fetch = mysqli_fetch_array($profile);
       <section class="sidebar">
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="images/avatar.png" class="img-circle" alt="User Image">
+            <img src="images/admin.jpg" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
             <p>Administrator</p>
@@ -221,26 +221,26 @@ $fetch = mysqli_fetch_array($profile);
         <table class="table table-bordered table-condensed table-hover">
 
           <?php
-          require "dbcon.php";
+          require __DIR__ . "/config/database.php";
           $sql = "select  count(*) as total  from station_manager ";
-          $query = mysqli_query($connect, $sql);
+          $query = mysqli_query($conn, $sql);
           $data = mysqli_fetch_assoc($query);
 
           $sql4 = "select  count(*) as total4  from maintenance_manager";
-          $query4 = mysqli_query($connect, $sql4);
+          $query4 = mysqli_query($conn, $sql4);
           $data4 = mysqli_fetch_assoc($query4);
 
           $sql6 = "select  count(*) as total6  from tankers";
-          $query6 = mysqli_query($connect, $sql6);
+          $query6 = mysqli_query($conn, $sql6);
           $data6 = mysqli_fetch_assoc($query6);
 
           $sql8 = "select  count(*) as total8  from stations";
-          $query8 = mysqli_query($connect, $sql8);
+          $query8 = mysqli_query($conn, $sql8);
           $data8 = mysqli_fetch_assoc($query8);
 
 
           $sql9 = "select  count(*) as total9  from employees";
-          $query9 = mysqli_query($connect, $sql9);
+          $query9 = mysqli_query($conn, $sql9);
           $data9 = mysqli_fetch_assoc($query9);
           ?>
 
