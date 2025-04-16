@@ -28,7 +28,7 @@ $fetch = mysqli_fetch_array($profile);
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
-      <a href="ahome.php" class="logo">
+      <a href="admin_dashboard.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
         <span class="logo-lg"><b>KABURIYE & SONS NIG LTD</b></span>
       </a>
@@ -54,7 +54,7 @@ $fetch = mysqli_fetch_array($profile);
                 <li class="user-body">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="ahome.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="admin_dashboard.php" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="alogout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -96,7 +96,7 @@ $fetch = mysqli_fetch_array($profile);
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="ahome.php"><i class="fa fa-user"></i>Profile</a></li>
+              <li><a href="admin_dashboard.php"><i class="fa fa-user"></i>Profile</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -270,7 +270,7 @@ $fetch = mysqli_fetch_array($profile);
 
                 echo '<td class=""><button class="btn-info "><a href="sm_more.php?ID=' . $record['ID'] . '">More</a></button></td>';
                 echo '<td class=""><button class=" btn-success"><a href="sm_edit.php?ID=' . $record['ID'] . '">EDIT </a></button></td>';
-                echo '<td class=""><button class="btn-danger "><a href="sm_delete.php?ID=' . $record['ID'] . '">DELETE</a></button></td>';
+                echo '<td class=""><button class="btn-danger"><a href="sm_delete.php?ID=' . $record['ID'] . '">DELETE</a></button></td>';
 
 
                 echo '</tr>';

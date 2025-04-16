@@ -1,31 +1,53 @@
 <?php
 session_start();
 require __DIR__ . "/config/database.php";
-if (!$_SESSION['maintenance']) {
+if (!$_SESSION['user']) {
   header("Location:mm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['maintenance'];
-$profile = mysqli_query($conn, "select * from maintenance_manager where maintenancemanager_id='$user'");
-$fetch = mysqli_fetch_array($profile);
+// var_dump($_SESSION['user']);
+
+$user = $_SESSION['user']['email'];
+$profile = mysqli_query($conn, "select * from maintenance_manager where email ='$user'");
+$fetch = mysqli_fetch_assoc($profile);
+
 
 if (isset($_POST['submit'])) {
 
-  $confirmpassword = mysqli_real_escape_string($conn, $_POST['c_password']);
-  $confirmpassword = stripslashes($_POST['c_password']);
-  $password = mysqli_real_escape_string($conn, $_POST['password']);
-  $password = stripslashes($_POST['password']);
-  if (md5($confirmpassword) !== md5($password)) {
-    $error = 'Password does not match';
-  } else {
+  try {
+    
+    $email = $_SESSION['user']['email'];
 
-    $confirmpass = md5($confirmpassword);
+    $old_password = mysqli_real_escape_string($conn, trim(md5($_POST['o_password'])));
 
-    $sql = "Update maintenance_manager set password='$confirmpass' where maintenancemanager_id='$user'";
-    $query = mysqli_query($conn, $sql);
-    $sus = "Password Sucessfully Changed";
+    $query = "SELECT email, password FROM maintenance_manager WHERE email = '$email' AND password = '$old_password'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+      
+      $confirmpassword = mysqli_real_escape_string($conn, $_POST['c_password']);
+      $confirmpassword = stripslashes(trim($_POST['c_password']));
+      $password = mysqli_real_escape_string($conn, $_POST['password']);
+      $password = stripslashes(trim($_POST['password']));
+
+      if (md5($confirmpassword) !== md5($password)) {
+        $error = 'Password does not match';
+      } else {
+        $current_password = md5($confirmpassword);
+
+        $sql = "UPDATE maintenance_manager SET password = '$current_password' WHERE email ='$user'";
+        $query = mysqli_query($conn, $sql);
+        $success = "Password Sucessfully Changed";
+
+      }
+    } else {
+      $error = 'Old password is incorrect';
+    }
+  } catch (\Throwable $th) {
+    throw $th;
   }
+
+
 }
 
 ?>
@@ -48,7 +70,7 @@ if (isset($_POST['submit'])) {
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
-      <a href="mm_login_home.php" class="logo">
+      <a href="mm_home.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
         <span class="logo-lg"><b>KABURIYE & SONS NIG LTD</b></span>
       </a>
@@ -61,7 +83,9 @@ if (isset($_POST['submit'])) {
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -74,7 +98,7 @@ if (isset($_POST['submit'])) {
                 <li class="user-body">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="mm_login_home.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="mm_home.php" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="mm_logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -95,12 +119,14 @@ if (isset($_POST['submit'])) {
           <div class="pull-left info">
             <p>Maintenance Manager </p>
 
-            <a href="#"> <?php echo "$fetch[maintenancemanager_id]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
+            <a href="#">
+              <?php echo "$fetch[maintenancemanager_id]"; ?> <i class="fa fa-circle text-success"></i> Online
+            </a>
           </div>
         </div>
         <form action="#" method="get" class="sidebar-form">
           <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <input type="password" name="q" class="form-control" placeholder="Search...">
             <span class="input-group-btn">
               <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
@@ -144,22 +170,29 @@ if (isset($_POST['submit'])) {
     </aside>
     <div class="content-wrapper">
       <section class="content">
-        <h2 align="center" style="color:red;"> Change Password</h2>
+        <h2 align="center" style="color:black;"> Change Password</h2>
 
 
         <form class="form-horizontal" role="form" method="post">
-
-
-
-          <h4 style="color:red;"> <?php if (isset($error)) {
-                                    echo $error;
-                                  } elseif (isset($sus)) {
-                                    echo $sus;
-                                  } ?></h4>
+            <?php
+              if(isset($error)){
+                ?>
+                <p style="color:red;text-align:center;margin:14px;"><?= $error; ?></p>
+                <?php
+              }
+            ?>
+            <?php
+              if(isset($success)){
+                ?>
+                <p style="color:green;text-align:center;margin:14px;"><?= $success; ?></p>
+                <?php
+              }
+            ?>
+          </h4>
           <div class="form-group">
             <label class="control-label col-sm-2" for="o_password">Old Password</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" required name="o_password" placeholder="Old Password">
+              <input type="password" class="form-control" required name="o_password" placeholder="Old Password">
             </div>
           </div>
 
@@ -168,7 +201,7 @@ if (isset($_POST['submit'])) {
           <div class="form-group">
             <label class="control-label col-sm-2" for="surname">New Password</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="password" required placeholder="New Password">
+              <input type="password" class="form-control" name="password" required placeholder="New Password">
             </div>
           </div>
 
@@ -178,7 +211,7 @@ if (isset($_POST['submit'])) {
           <div class="form-group">
             <label class="control-label col-sm-2" for="othername">Confirm Password</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="c_password" required placeholder="Confirm Password">
+              <input type="password" class="form-control" name="c_password" required placeholder="Confirm Password">
             </div>
           </div>
           <center> <input type="submit" class="btn btn-success" value="Change" name="submit"></center>

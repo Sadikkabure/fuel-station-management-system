@@ -33,7 +33,7 @@ $all_stations = mysqli_query($conn, $query);
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
-      <a href="ahome.php" class="logo">
+      <a href="admin_dashboard.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
         <span class="logo-lg"><b>KABURIYE & SONS NIG LTD</b></span>
       </a>
@@ -46,7 +46,9 @@ $all_stations = mysqli_query($conn, $query);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -64,7 +66,7 @@ $all_stations = mysqli_query($conn, $query);
 
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="ahome.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="admin_dashboard.php" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="alogout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -107,7 +109,7 @@ $all_stations = mysqli_query($conn, $query);
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="ahome.php"><i class="fa fa-user"></i>Profile</a></li>
+              <li><a href="admin_dashboard.php"><i class="fa fa-user"></i>Profile</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -241,7 +243,7 @@ $all_stations = mysqli_query($conn, $query);
           $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
           $email = mysqli_real_escape_string($conn, $_POST['email']);
 
-          $sql = "Insert into station_manager(employee_id,
+          $sql = "INSERT INTO station_manager(employee_id,
   surname,
   othername,
   sex,
@@ -266,12 +268,9 @@ VALUES('$employee_id',
   '$station_id')";
 
           if (mysqli_query($conn, $sql)) {
-
             $message = "Station Manager added Successfully...";
           } else {
-
-            die(mysqli_error($conn));
-            echo "ERROR: You cannot have same Staff number for two Stations ";
+            die("ERROR: You cannot have same Staff number for two Stations");
           }
 
 
@@ -287,7 +286,10 @@ VALUES('$employee_id',
 
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
-          <h3 style="color:#F00;"> <?php if (isset($message)) echo $message; ?></h3>
+          <h3 style="color:#F00;">
+            <?php if (isset($message))
+              echo $message; ?>
+          </h3>
           <h1 align="center" style="color:black;">New Station Manager Registration</h1>
 
           <div class="form-group">
@@ -296,8 +298,9 @@ VALUES('$employee_id',
               <select name="station_id" class="form-control" required>
                 <?php
 
-                while ($stations = mysqli_fetch_array($all_stations, MYSQLI_ASSOC)):;
-                ?>
+                while ($stations = mysqli_fetch_array($all_stations, MYSQLI_ASSOC)):
+                  ;
+                  ?>
 
                   <option value="<?php echo $stations["station_id"]; ?>">
 
@@ -305,7 +308,7 @@ VALUES('$employee_id',
                     ?>
                   </option>
 
-                <?php
+                  <?php
                 endwhile;
                 ?>
               </select>

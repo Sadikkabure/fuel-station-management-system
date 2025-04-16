@@ -1,21 +1,16 @@
 <?php
 session_start();
 require __DIR__ . "/config/database.php";
-if (!$_SESSION['maintenance']) {
-  header("Location:mm_login.php");
+if (!$_SESSION['user']) {
+  header("Location: mm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['maintenance'];
-$profile = mysqli_query($conn, "select * from maintenance_manager where maintenancemanager_id='$user'");
-$fetch = mysqli_fetch_array($profile);
+$user = $_SESSION['user']['email'];
+$profile = mysqli_query($conn, "select * from maintenance_manager where email ='$user'");
+$fetch = mysqli_fetch_assoc($profile);
 
 $query = "select * from employees";
 $employees = mysqli_query($conn, $query);
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 
 ?>
@@ -37,7 +32,7 @@ error_reporting(E_ALL);
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
-      <a href="mm_login_home.php" class="logo">
+      <a href="mm_home.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
         <span class="logo-lg"><b>Kaburiye & sons NIG LTD</b></span>
       </a>
@@ -50,7 +45,9 @@ error_reporting(E_ALL);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -63,7 +60,7 @@ error_reporting(E_ALL);
                 <li class="user-body">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="mm_login_home.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="mm_home.php" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="mm_logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -84,7 +81,9 @@ error_reporting(E_ALL);
           <div class="pull-left info">
             <p>Maintenance Manager </p>
 
-            <a href="#"> <?php echo "$fetch[maintenancemanager_id]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
+            <a href="#">
+              <?php echo "$fetch[maintenancemanager_id]"; ?> <i class="fa fa-circle text-success"></i> Online
+            </a>
           </div>
         </div>
         <form action="#" method="get" class="sidebar-form">
@@ -183,13 +182,17 @@ VALUES('$ename',
 
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
-          <h3 style="color:#F00;"> <?php if (isset($message)) echo $message; ?></h3>
+          <h3 style="color:#F00;">
+            <?php if (isset($message))
+              echo $message; ?>
+          </h3>
 
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="MMID"> Manager ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="mid" readonly required value="<?php echo "$fetch[maintenancemanager_id]"; ?>">
+              <input type="text" class="form-control" name="mid" readonly required
+                value="<?php echo "$fetch[maintenancemanager_id]"; ?>">
             </div>
           </div>
 
@@ -201,8 +204,9 @@ VALUES('$ename',
               <select name="ename" class="form-control" required>
                 <?php
 
-                while ($empl = mysqli_fetch_array($employees, MYSQLI_ASSOC)):;
-                ?>
+                while ($empl = mysqli_fetch_array($employees, MYSQLI_ASSOC)):
+                  ;
+                  ?>
 
                   <option value="<?php echo $empl["surname"]; ?>">
 
@@ -210,7 +214,7 @@ VALUES('$ename',
                     ?>
                   </option>
 
-                <?php
+                  <?php
                 endwhile;
                 ?>
               </select>

@@ -28,9 +28,9 @@ $fetch = mysqli_fetch_array($profile);
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
-      <a href="ahome.php" class="logo">
+      <a href="admin_dashboard.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
-        <span class="logo-lg"><b>KABURIYE & SONS NIG LTD</b></span>
+        <span class="logo-lg"><b>ADMIN</b></span>
       </a>
       <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -48,13 +48,13 @@ $fetch = mysqli_fetch_array($profile);
                   <img src="images/admin.jpg" class="img-circle" alt="User Image">
                   <p>
                     <?php echo "$fetch[email]"; ?>
-
+                    <small><b>ADMIN</b></small>
                   </p>
                 </li>
                 <li class="user-body">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="ahome.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="admin_dashboard.php" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="alogout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -96,7 +96,7 @@ $fetch = mysqli_fetch_array($profile);
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="ahome.php"><i class="fa fa-user"></i>Profile</a></li>
+              <li><a href="admin_dashboard.php"><i class="fa fa-user"></i>Profile</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -151,7 +151,6 @@ $fetch = mysqli_fetch_array($profile);
           </li>
 
 
-
           <li class="treeview">
             <a href="#">
               <i class="fa fa-group"></i> <span>Employees</span>
@@ -182,12 +181,12 @@ $fetch = mysqli_fetch_array($profile);
           <li>
 
           <li>
-            <a href="m_report.php">
-              <i class="fa fa-files-o"></i> <span>Maintenance Report</span>
-              <span class="pull-right-container">
-
-              </span>
-            </a>
+            <!-- <a href="m_report.php">
+            <i class="fa fa-files-o"></i> <span>Maintenance Report</span>
+            <span class="pull-right-container">
+            
+            </span>
+          </a> -->
           </li>
           <li>
 
@@ -205,112 +204,73 @@ $fetch = mysqli_fetch_array($profile);
           <li>
 
           <li>
-            <a href="alogout.php">
+            <a href="index.php">
               <i class="fa fa-sign-out"></i> <span>Logout</span>
               <span class="pull-right-container">
 
               </span>
             </a>
           </li>
+
+
       </section>
     </aside>
     <div class="content-wrapper">
       <section class="content">
-        <h2 align="center" style="color:blue;"> Maintenance Managers Biodata</h2>
+        <h2 align="center" style="color:red;"> DASHBOARD</h2>
+        <table class="table table-bordered table-condensed table-hover">
+
+          <?php
+          require __DIR__ . "/config/database.php";
+          $sql = "select  count(*) as total  from station_manager ";
+          $query = mysqli_query($conn, $sql);
+          $data = mysqli_fetch_assoc($query);
+
+          $sql4 = "select  count(*) as total4  from maintenance_manager";
+          $query4 = mysqli_query($conn, $sql4);
+          $data4 = mysqli_fetch_assoc($query4);
+
+          $sql6 = "select  count(*) as total6  from tankers";
+          $query6 = mysqli_query($conn, $sql6);
+          $data6 = mysqli_fetch_assoc($query6);
+
+          $sql8 = "select  count(*) as total8  from stations";
+          $query8 = mysqli_query($conn, $sql8);
+          $data8 = mysqli_fetch_assoc($query8);
 
 
+          $sql9 = "select  count(*) as total9  from employees";
+          $query9 = mysqli_query($conn, $sql9);
+          $data9 = mysqli_fetch_assoc($query9);
+          ?>
 
-        <div class="table-responsive">
-
-          <table class="table table-bordered table-hover">
-            <thead>
-              <tr class="success">
-                <th> SN</th>
-                <th> Manager ID </th>
-                <th> Surname</th>
-                <th> Othername</th>
-                <th>Sex</th>
-                <th>DOB</th>
-                <th>SOG</th>
-
-
-
-                <th>More</th>
-                <th>Edit</th>
-                <th>Delete</th>
-
-              </tr>
-            </thead>
+          <tr class="danger">
+            <th><b>Total Number of Station Manager</b></th>
+            <td><?php echo $data['total'] ?></td>
+          </tr>
+          <tr class="danger">
+            <th><b>Total Number of Maintenance Manager</b></th>
+            <td><?php echo $data4['total4'] ?></td>
+          </tr>
+          <tr class="danger">
+            <th><b>Total Number of Tankers</b></th>
+            <td><?php echo $data6['total6'] ?></td>
+          </tr>
 
 
-            <?php
-            require __DIR__ . "/config/database.php";
-            $getRecords_string = "select * from maintenance_manager order by ID ASC ";
+          <tr class="danger">
+            <th><b>Total Number of Stations</b></th>
+            <td><?php echo $data8['total8'] ?></td>
+          </tr>
 
-            $getRecord = mysqli_query($conn, $getRecords_string);
-            $num_of_record = mysqli_num_rows($getRecord);
-            if ($num_of_record > 0) {
-
-              while ($record = mysqli_fetch_array($getRecord)) {
-
-
-                echo '<tr>';
-
-                echo "<td class=''>$record[ID]</td>";
-                echo "<td class=''>$record[maintenancemanager_id]</td>";
-                echo "<td class=''>$record[surname]</td>";
-                echo "<td class=''>$record[othername]</td>";
-                echo "<td class=''>$record[sex]</td>";
-                echo "<td class=''>$record[dob]</td>";
-                echo "<td class=''>$record[state_origin]</td>";
-
-
-
-                echo '<td class=""><button class="btn-info "><a href="mm_more.php?ID=' . $record['ID'] . '">More</a></button></td>';
-                echo '<td class=""><button class=" btn-success"><a href="mm_edit.php?ID=' . $record['ID'] . '">EDIT </a></button></td>';
-                echo '<td class=""><button class="btn-danger "><a href="mm_delete.php?ID=' . $record['ID'] . '">DELETE</a></button></td>';
-
-
-                echo '</tr>';
-              }
-            } else {
-              echo "<h6>Loading..........</h6>";
-            }
-
-
-            ?>
-
-
-          </table>
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          <tr class="danger">
+            <th><b>Total Number of Employees</b></th>
+            <td><?php echo $data9['total9'] ?></td>
+          </tr>
+        </table>
       </section>
+
+
     </div>
 
     <footer class="main-footer">

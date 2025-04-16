@@ -3,21 +3,28 @@ session_start();
 
 if (isset($_POST['submit'])) {
     require __DIR__ . "/config/database.php";
-    $username = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    $query = "SELECT * FROM maintenance_manager where maintenancemanager_id='$username' AND password='" . md5($password) . "'";
-    $user = mysqli_query($conn, $query);
-    $user_no = mysqli_num_rows($user);
-    if ($user_no == 1) {
-        $user_data = mysqli_fetch_array($user);
-        $_SESSION['user'] = true;
-        $_SESSION['maintenance'] = $username;
-        header("location:mm_login_home.php");
-        die();
-    } else {
-        $error = "Check your Login details";
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, md5($_POST['password']));
+
+    try {
+        $query = "SELECT * FROM maintenance_manager WHERE email = '$email' AND password = '$password'";
+        $user = mysqli_query($conn, $query);
+        $user_no = mysqli_num_rows($user);
+
+        if ($user_no > 0) {
+            $user_data = mysqli_fetch_assoc($user);
+            $_SESSION['user'] = $user_data;
+            $_SESSION['maintenance'] = $email;
+            header("location: mm_home.php");
+            die();
+        } else {
+            $error = "Check your Login details";
+        }
+    } catch(Exception $e){
+        echo $e->getMessage();
     }
+
 }
 ?>
 
@@ -66,7 +73,8 @@ if (isset($_POST['submit'])) {
                 <div class="container-fluid">
 
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -112,7 +120,10 @@ if (isset($_POST['submit'])) {
                             <div class="form-top-left">
 
                                 <p align="center">Enter Login Details</p>
-                                <h5 align="center" style="color:red;"> <?php if (isset($error)) echo $error;  ?></h5>
+                                <h5 align="center" style="color:red;">
+                                    <?php if (isset($error))
+                                        echo $error; ?>
+                                </h5>
                             </div>
                             <div class="form-top-right">
                                 <i class="fa fa-lock"></i>
@@ -122,12 +133,14 @@ if (isset($_POST['submit'])) {
                             <form role="form" method="post" class="login-form">
                                 <div class="form-group">
                                     <label class="sr-only" for="form-username">Username</label>
-                                    <input type="text" name="email" required placeholder="Employee ID" class="form-username form-control" id="form-username">
+                                    <input type="text" name="email" required placeholder="Email address"
+                                        class="form-username form-control" id="form-username">
 
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-password">Password</label>
-                                    <input type="password" name="password" required placeholder="Password" class="form-password form-control" id="form-password">
+                                    <input type="password" name="password" required placeholder="Password"
+                                        class="form-password form-control" id="form-password">
                                 </div>
                                 <button type="submit" name="submit" class="btn2 form-control">Sign in!</button>
                             </form>

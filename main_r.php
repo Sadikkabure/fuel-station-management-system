@@ -31,7 +31,7 @@ $fetch = mysqli_fetch_array($profile);
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
-      <a href="mm_login_home.php" class="logo">
+      <a href="mm_home.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
         <span class="logo-lg"><b>KABURIYE & SONS NIG LTD</b></span>
       </a>
@@ -44,7 +44,9 @@ $fetch = mysqli_fetch_array($profile);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -57,7 +59,7 @@ $fetch = mysqli_fetch_array($profile);
                 <li class="user-body">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="mm_login_home.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="mm_home.php" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="mm_logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -78,7 +80,9 @@ $fetch = mysqli_fetch_array($profile);
           <div class="pull-left info">
             <p>Maintenance Manager </p>
 
-            <a href="#"> <?php echo "$fetch[maintenancemanager_id]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
+            <a href="#">
+              <?php echo "$fetch[maintenancemanager_id]"; ?> <i class="fa fa-circle text-success"></i> Online
+            </a>
           </div>
         </div>
         <form action="#" method="get" class="sidebar-form">

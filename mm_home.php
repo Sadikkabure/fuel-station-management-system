@@ -1,35 +1,18 @@
 <?php
 session_start();
 require __DIR__ . "/config/database.php";
-if (!$_SESSION['maintenance']) {
-  header("Location:mm_login.php");
+if (!$_SESSION['user']) {
+  header("Location: mm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['maintenance'];
-$profile = mysqli_query($conn, "select * from maintenance_manager where maintenancemanager_id='$user'");
-$fetch = mysqli_fetch_array($profile);
 
-if (isset($_POST['submit'])) {
+$user = $_SESSION['user']['email'];
+$profile = mysqli_query($conn, "select * from maintenance_manager where email ='$user'");
+$fetch = mysqli_fetch_assoc($profile);
 
-  $confirmpassword = mysqli_real_escape_string($conn, $_POST['c_password']);
-  $confirmpassword = stripslashes($_POST['c_password']);
-  $password = mysqli_real_escape_string($conn, $_POST['password']);
-  $password = stripslashes($_POST['password']);
-  if (md5($confirmpassword) !== md5($password)) {
-    $error = 'Password does not match';
-  } else {
 
-    $confirmpass = md5($confirmpassword);
-
-    $sql = "Update maintenance_manager set password='$confirmpass' where maintenancemanager_id='$user'";
-    $query = mysqli_query($conn, $sql);
-    $sus = "Password Sucessfully Changed";
-  }
-}
 
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -48,7 +31,7 @@ if (isset($_POST['submit'])) {
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
-      <a href="mm_login_home.php" class="logo">
+      <a href="mm_home.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
         <span class="logo-lg"><b>KABURIYE & SONS NIG LTD</b></span>
       </a>
@@ -61,7 +44,9 @@ if (isset($_POST['submit'])) {
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -74,7 +59,7 @@ if (isset($_POST['submit'])) {
                 <li class="user-body">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="mm_login_home.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="mm_home.php" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="mm_logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -92,10 +77,13 @@ if (isset($_POST['submit'])) {
           <div class="pull-left image">
             <img src="images/admin.jpg" class="img-circle" alt="User Image">
           </div>
+
           <div class="pull-left info">
             <p>Maintenance Manager </p>
 
-            <a href="#"> <?php echo "$fetch[maintenancemanager_id]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
+            <a href="#">
+              <?php echo "$fetch[maintenancemanager_id]"; ?> <i class="fa fa-circle text-success"></i> Online
+            </a>
           </div>
         </div>
         <form action="#" method="get" class="sidebar-form">
@@ -123,6 +111,7 @@ if (isset($_POST['submit'])) {
             </ul>
           </li>
 
+
           <li>
             <a href="mm_cpassword.php">
               <i class="fa fa-key"></i> <span>Change password</span>
@@ -144,45 +133,87 @@ if (isset($_POST['submit'])) {
     </aside>
     <div class="content-wrapper">
       <section class="content">
-        <h2 align="center" style="color:red;"> Change Password</h2>
-
-
-        <form class="form-horizontal" role="form" method="post">
-
-
-
-          <h4 style="color:red;"> <?php if (isset($error)) {
-                                    echo $error;
-                                  } elseif (isset($sus)) {
-                                    echo $sus;
-                                  } ?></h4>
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="o_password">Old Password</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" required name="o_password" placeholder="Old Password">
-            </div>
-          </div>
-
-
-
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="surname">New Password</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="password" required placeholder="New Password">
-            </div>
-          </div>
+        <h2 align="center" style="color:red;"> User Biodata</h2>
 
 
 
 
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="othername">Confirm Password</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="c_password" required placeholder="Confirm Password">
-            </div>
-          </div>
-          <center> <input type="submit" class="btn btn-success" value="Change" name="submit"></center>
-        </form>
+
+        <table class="table  table-hover">
+
+          <tr class="success">
+
+            <th> Employee ID </th>
+            <td>
+              <?php echo "$fetch[maintenancemanager_id]"; ?>
+            </td>
+          </tr>
+
+
+          <tr class="info">
+            <th> Surname</th>
+            <td>
+              <?php echo "$fetch[surname]"; ?>
+            </td>
+
+          </tr>
+          <tr>
+            <th> Othername</th>
+            <td>
+              <?php echo "$fetch[othername]"; ?>
+            </td>
+          </tr>
+          <tr class="warning">
+            <th> Sex</th>
+            <td>
+              <?php echo "$fetch[sex]"; ?>
+            </td>
+          </tr>
+
+          <tr>
+            <th> Email</th>
+            <td>
+              <?php echo "$fetch[email]"; ?>
+            </td>
+          </tr>
+
+          <tr class="danger">
+            <th>Phonenumber </th>
+            <td>
+              <?php echo "$fetch[phonenumber]"; ?>
+            </td>
+          </tr>
+          </tr>
+          <tr class="info">
+            <th> Date of Birth</th>
+            <td>
+              <?php echo "$fetch[dob]"; ?>
+            </td>
+
+          </tr>
+          <tr>
+            <th> State of Origin</th>
+            <td>
+              <?php echo "$fetch[state_origin]"; ?>
+            </td>
+          </tr>
+          <tr class="warning">
+            <th> Local Government</th>
+            <td>
+              <?php echo "$fetch[local]"; ?>
+            </td>
+          </tr>
+
+          <tr>
+            <th> Religion</th>
+            <td>
+              <?php echo "$fetch[religion]"; ?>
+            </td>
+          </tr>
+
+
+        </table>
+
 
       </section>
 

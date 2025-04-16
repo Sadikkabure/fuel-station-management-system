@@ -32,7 +32,7 @@ error_reporting(E_ALL);
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
-      <a href="ahome.php" class="logo">
+      <a href="admin_dashboard.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
         <span class="logo-lg"><b>KABURIYE & SONS NIG LTD</b></span>
       </a>
@@ -45,7 +45,9 @@ error_reporting(E_ALL);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -58,7 +60,7 @@ error_reporting(E_ALL);
                 <li class="user-body">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="ahome.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="admin_dashboard.php" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="alogout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -100,7 +102,7 @@ error_reporting(E_ALL);
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="ahome.php"><i class="fa fa-user"></i>Profile</a></li>
+              <li><a href="admin_dashboard.php"><i class="fa fa-user"></i>Profile</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -233,6 +235,10 @@ error_reporting(E_ALL);
           $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
           $email = mysqli_real_escape_string($conn, $_POST['email']);
 
+          //Logic for password 
+          $password = md5("1234");
+
+          // SQL query...
           $sql = "Insert into maintenance_manager(maintenancemanager_id,
   surname,
   othername,
@@ -254,7 +260,7 @@ VALUES('$employee_id',
   '$religion',
   '$phone_number',
   '$email',
-  '$surname')";
+  '$password')";
 
           if (mysqli_query($conn, $sql)) {
 
@@ -268,7 +274,10 @@ VALUES('$employee_id',
         ?>
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
-          <h3 style="color:#F00;"> <?php if (isset($message)) echo $message; ?></h3>
+          <h3 style="color:#F00;">
+            <?php if (isset($message))
+              echo $message; ?>
+          </h3>
           <h1 align="center" style="color:green;">New Maintenanace Manager Registration</h1>
           <div class="form-group">
             <label class="control-label col-sm-2" for="adm_number">Employee ID</label>

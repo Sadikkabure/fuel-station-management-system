@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
 		$user_data = mysqli_fetch_array($user);
 
 		$_SESSION['data'] = $email;
-		header("location:ahome.php");
+		header("location: admin_dashboard.php");
 		die();
 	} else {
 		$error = "Check your Login details";
