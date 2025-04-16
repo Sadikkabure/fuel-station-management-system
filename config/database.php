@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db = "fms_db";
+$db = "sadik";
 
 // Connect to the database
 $conn = new mysqli($servername, $username, $password, $db);

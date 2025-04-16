@@ -1,3 +1,3 @@
 <?php
 $conn = mysqli_connect("localhost", "root");
-$db = mysqli_select_db($conn, "tukur");
+$db = mysqli_select_db($conn, "sadik");
