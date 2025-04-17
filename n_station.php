@@ -1,11 +1,11 @@
 <?php
+require __DIR__ . "/config/database.php";
 session_start();
 
 if (!$_SESSION['data']) {
   header("Location:admin.php");
   die();
 }
-require __DIR__ . "/config/database.php";
 $user = $_SESSION['data'];
 $profile = mysqli_query($conn, "select * from admin where email='$user'");
 $fetch = mysqli_fetch_array($profile);
@@ -44,7 +44,9 @@ $fetch = mysqli_fetch_array($profile);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -229,7 +231,6 @@ $fetch = mysqli_fetch_array($profile);
           $e_id = mysqli_real_escape_string($conn, $_POST['eid']);
           $gas = mysqli_real_escape_string($conn, $_POST['gas']);
           $sc = mysqli_real_escape_string($conn, $_POST['sc']);
-          $passw = mysqli_real_escape_string($conn, $_POST['pass']);
           $trn_date = date("Y-m-d H:i:s");
 
           $sql = "Insert into stations(
@@ -238,7 +239,6 @@ $fetch = mysqli_fetch_array($profile);
   petrol_price,
   gas_price,
   station_category,
-  password,
   trn_date)
 
 VALUES(
@@ -247,15 +247,13 @@ VALUES(
   '$e_id',
   '$gas',
   '$sc',
-  '" . md5($passw) . "',
   '$trn_date')";
 
           if (mysqli_query($conn, $sql)) {
 
             $message = "Station added Successfully...";
           } else {
-            die(mysqli_error($conn));
-            echo ("ERROR: Review  the details  ");
+            echo ("ERROR: Review  the details ");
           }
 
 
@@ -266,7 +264,10 @@ VALUES(
 
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
-          <h3 style="color:#F00;"> <?php if (isset($message)) echo $message; ?></h3>
+          <h3 style="color:#F00;">
+            <?php if (isset($message))
+              echo $message; ?>
+          </h3>
 
 
 
@@ -313,12 +314,6 @@ VALUES(
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="Password">Password</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="pass" required placeholder="Password">
-            </div>
-          </div>
 
           <center> <input type="submit" class="btn btn-success" value="Register" name="register"></center>
 

@@ -10,9 +10,9 @@ $user = $_SESSION['data'];
 $profile = mysqli_query($conn, "select * from admin where email='$user'");
 $fetch = mysqli_fetch_array($profile);
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
+$query = "select * from stations";
+$all_stations = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,6 +27,7 @@ error_reporting(E_ALL);
   <link rel="stylesheet" href="css/ionicons.min.css">
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <link rel="stylesheet" href="css/_all-skins.min.css">
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -57,7 +58,12 @@ error_reporting(E_ALL);
                     <small><b>Admin</b></small>
                   </p>
                 </li>
-                <li class="user-body">
+
+
+
+
+
+
                 <li class="user-footer">
                   <div class="pull-left">
                     <a href="admin_dashboard.php" class="btn btn-default btn-flat">Profile</a>
@@ -68,6 +74,7 @@ error_reporting(E_ALL);
                 </li>
               </ul>
             </li>
+
           </ul>
         </div>
       </nav>
@@ -223,62 +230,89 @@ error_reporting(E_ALL);
     <div class="content-wrapper">
       <section class="content">
         <?php
-        if (isset($_POST['register'])) {
-          $employee_id = mysqli_real_escape_string($conn, $_POST['adm_number']);
-          $surname = mysqli_real_escape_string($conn, $_POST['surname']);
-          $othername = mysqli_real_escape_string($conn, $_POST['othername']);
-          $sex = mysqli_real_escape_string($conn, $_POST['sex']);
-          $dob = mysqli_real_escape_string($conn, $_POST['dob']);
-          $state = mysqli_real_escape_string($conn, $_POST['state']);
-          $local = mysqli_real_escape_string($conn, $_POST['local']);
-          $religion = mysqli_real_escape_string($conn, $_POST['religion']);
-          $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
-          $email = mysqli_real_escape_string($conn, $_POST['email']);
+        try {
+          if (isset($_POST['register'])) {
+            $station_id = mysqli_real_escape_string($conn, $_POST['station_id']);
+            $employee_id = mysqli_real_escape_string($conn, $_POST['adm_number']);
+            $surname = mysqli_real_escape_string($conn, $_POST['surname']);
+            $othername = mysqli_real_escape_string($conn, $_POST['othername']);
+            $sex = mysqli_real_escape_string($conn, $_POST['sex']);
+            $dob = mysqli_real_escape_string($conn, $_POST['dob']);
+            $state = mysqli_real_escape_string($conn, $_POST['state']);
+            $local = mysqli_real_escape_string($conn, $_POST['local']);
+            $religion = mysqli_real_escape_string($conn, $_POST['religion']);
+            $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
+            $email = mysqli_real_escape_string($conn, $_POST['email']);
 
-          //Logic for password 
-          $password = md5("1234");
+            $sql = "INSERT INTO station_manager(employee_id,
+                  surname,
+                  othername,
+                  sex,
+                  dob,
+                  state_origin,
+                  local_government,
+                  religion,
+                  phonenumber,
+                  email,
+                  station_id
+                  )
+                VALUES('$employee_id',
+                  '$surname',
+                  '$othername',
+                  '$sex',
+                  '$dob',
+                  '$state',
+                  '$local',
+                  '$religion',
+                  '$phone_number',
+                  '$email',
+                  '$station_id')";
 
-          // SQL query...
-          $sql = "Insert into maintenance_manager(maintenancemanager_id,
-  surname,
-  othername,
-  sex,
-  dob,
-  state_origin,
-  local,
-  religion,
-  phonenumber,
-  email,
-  password)
-VALUES('$employee_id',
-  '$surname',
-  '$othername',
-  '$sex',
-  '$dob',
-  '$state',
-  '$local',
-  '$religion',
-  '$phone_number',
-  '$email',
-  '$password')";
+            if (mysqli_query($conn, $sql)) {
+              $message = "Station Manager added Successfully...";
+            } else {
+              $message = "";
+            }
 
-          if (mysqli_query($conn, $sql)) {
-
-            $message = "Maintenanace Manager added Successfully...";
-          } else {
-            die(mysqli_error($conn));
-            echo "ERROR: You cannot have same staff number for two Staff ";
+            mysqli_close($conn);
           }
-          mysqli_close($conn);
+        } catch (Exception $th) {
+          echo "<h2 class='text-danger text-center'>ERROR: You cannot have same Staff number for two Stations</h2>";
+          exit();
         }
+
         ?>
+
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
           <h3 style="color:#F00;">
             <?php if (isset($message))
               echo $message; ?>
           </h3>
-          <h1 align="center" style="color:green;">New Maintenanace Manager Registration</h1>
+          <h1 align="center" style="color:black;">New Station Manager Registration</h1>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="station_id">Station ID</label>
+            <div class="col-sm-10">
+              <select name="station_id" class="form-control" required>
+                <?php
+
+                while ($stations = mysqli_fetch_array($all_stations, MYSQLI_ASSOC)):
+                  ;
+                  ?>
+
+                  <option value="<?php echo $stations["station_id"]; ?>">
+
+                    <?php echo $stations["station_id"];
+                    ?>
+                  </option>
+
+                  <?php
+                endwhile;
+                ?>
+              </select>
+            </div>
+          </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="adm_number">Employee ID</label>
             <div class="col-sm-10">
@@ -306,8 +340,6 @@ VALUES('$employee_id',
           </div>
 
 
-
-
           <div class="form-group">
             <label class="control-label col-sm-2" for="seez">Sex</label>
             <div class="col-sm-10">
@@ -316,6 +348,8 @@ VALUES('$employee_id',
 
             </div>
           </div>
+
+
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="dob">Date of Birth:</label>
@@ -330,7 +364,7 @@ VALUES('$employee_id',
           <div class="form-group">
             <label class="control-label col-sm-2" for="state">State of Origin:</label>
             <div class="col-sm-10">
-              <select required name="state" id="state" class="select-state form-control">
+               <select required name="state" id="state" class="select-state form-control">
             <option value="" selected="selected">-- State --</option>
             <option value="Abia">Abia</option>
             <option value="Adamawa">Adamawa</option>
@@ -375,7 +409,7 @@ VALUES('$employee_id',
 
 
 
-           <div class="form-group">
+          <div class="form-group">
             <label class="control-label col-sm-2" for="log">Local Government:</label>
             <div class="col-sm-10">
               <select name="local" id="lga" class="select-lga form-control" required>
@@ -400,11 +434,13 @@ VALUES('$employee_id',
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="log">Phonenumber</label>
+            <label class="control-label col-sm-2" for="log">PhoneNumber</label>
             <div class="col-sm-10">
-              <input type="phone_number" class="form-control" name="phone_number" required placeholder="Phonenumber">
+              <input type="text" class="form-control" name="phone_number" required placeholder="Phonenumber">
             </div>
           </div>
+
+
 
 
           <div class="form-group">
@@ -413,7 +449,15 @@ VALUES('$employee_id',
               <input type="email" class="form-control" name="email" required placeholder="Email">
             </div>
           </div>
+
+
+
+
           <center> <input type="submit" class="btn btn-success" value="Register" name="register"></center>
+
+
+
+
         </form>
       </section>
 
@@ -427,21 +471,19 @@ VALUES('$employee_id',
       <center> <strong>Copyright &copy; 2024 by PPMS</strong> All rights reserved.</center>
     </footer>
 
-  </div>
 
 
-  </div>
-
-   <script src="js/state-capital.js"></script>
-   <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-ui.min.js"></script>
-  <script>
-    $.widget.bridge('uibutton', $.ui.button);
-  </script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.sparkline.min.js"></script>
-  <script src="js/jquery.slimscroll.min.js"></script>
-  <script src="js/adminlte.min.js"></script>
+    <script src="js/state-capital.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script>
+      $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sparkline.min.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
+    <script src="js/adminlte.min.js"></script>
+    <script src="js/bootstrap3-wysihtml5.all.min.js"></script>
 </body>
 
 </html>

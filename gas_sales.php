@@ -5,16 +5,12 @@ if (!$_SESSION['station']) {
   header("Location:sm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['station'];
-$profile = mysqli_query($conn, "select * from station_manager where station_id='$user'");
-$fetch = mysqli_fetch_array($profile);
 
+// var_dump($_SESSION['station']);
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+$user = $_SESSION['station']['station_id'];
+$profile = mysqli_query($conn, "SELECT * from station_manager where station_id='$user'");
+$fetch = mysqli_fetch_assoc($profile);
 
 ?>
 
@@ -56,7 +52,9 @@ error_reporting(E_ALL);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -90,7 +88,9 @@ error_reporting(E_ALL);
           <div class="pull-left info">
             <p>Station Manager </p>
 
-            <a href="#"> <?php echo "$fetch[station_id]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
+            <a href="#">
+              <?php echo "$fetch[station_id]"; ?> <i class="fa fa-circle text-success"></i> Online
+            </a>
           </div>
         </div>
         <form action="#" method="get" class="sidebar-form">
@@ -184,30 +184,26 @@ error_reporting(E_ALL);
           $date = mysqli_real_escape_string($conn, $_POST['date']);
 
 
-          $sql = "Insert into gas_sales(
-  station_id,
-  litres_sold,
-  available_litres,
-  litre_price,
-  total_sales,
-  date
-  )
-VALUES('$s_id',
-  '$l_sold',
-  '$a_litre',
-  '$l_price',
-  '$totalsales',
-  '$date')";
+          $sql = "INSERT into gas_sales(
+          station_id,
+          litre_sold,
+          available_litre,
+          litre_price,
+          total_sales,
+          date
+          )
+        VALUES('$s_id',
+          '$l_sold',
+          '$a_litre',
+          '$l_price',
+          '$totalsales',
+          '$date')";
 
           if (mysqli_query($conn, $sql)) {
-
             $message = "Sales Record added Successfully...";
           } else {
-            die(mysqli_error($conn));
             echo "ERROR: Review  the details  ";
           }
-
-
           mysqli_close($conn);
         }
 
@@ -215,7 +211,10 @@ VALUES('$s_id',
 
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
-          <h3 style="color:#F00;"> <?php if (isset($message)) echo $message; ?></h3>
+          <h3 style="color:#F00;">
+            <?php if (isset($message))
+              echo $message; ?>
+          </h3>
 
 
 
@@ -228,7 +227,7 @@ VALUES('$s_id',
 
 
           <script>
-            calculate = function() {
+            calculate = function () {
               var litres_sold = document.getElementById('l_sold').value;
               var litres_price = document.getElementById('l_price').value;
               document.getElementById('totalsales').value = parseInt(litres_sold) * parseInt(litres_price);
@@ -239,7 +238,8 @@ VALUES('$s_id',
           <div class="form-group">
             <label class="control-label col-sm-2" for="litres sold">Litres Sold</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control variable-field quantity" id="l_sold" name="l_sold" oninput="calculate()" required>
+              <input type="number" class="form-control variable-field quantity" id="l_sold" name="l_sold"
+                oninput="calculate()" required>
             </div>
           </div>
 
@@ -251,14 +251,16 @@ VALUES('$s_id',
           <div class="form-group">
             <label class="control-label col-sm-2" for="log">Litre price</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control variable-field costpriceunit" id="l_price" name="l_price" value="<?php echo "$litre_price[gas_price]"; ?>" required readonly>
+              <input type="number" class="form-control variable-field costpriceunit" id="l_price" name="l_price"
+                value="<?php echo "$litre_price[gas_price]"; ?>" required readonly>
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="Available litres">Total sales</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control width-80 totalcostprice" id="totalsales" name="totalsales" readonly required>
+              <input type="number" class="form-control width-80 totalcostprice" id="totalsales" name="totalsales"
+                readonly required>
             </div>
           </div>
           </tr>

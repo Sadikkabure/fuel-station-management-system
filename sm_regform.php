@@ -230,57 +230,59 @@ $all_stations = mysqli_query($conn, $query);
     <div class="content-wrapper">
       <section class="content">
         <?php
-        if (isset($_POST['register'])) {
-          $station_id = mysqli_real_escape_string($conn, $_POST['station_id']);
-          $employee_id = mysqli_real_escape_string($conn, $_POST['adm_number']);
-          $surname = mysqli_real_escape_string($conn, $_POST['surname']);
-          $othername = mysqli_real_escape_string($conn, $_POST['othername']);
-          $sex = mysqli_real_escape_string($conn, $_POST['sex']);
-          $dob = mysqli_real_escape_string($conn, $_POST['dob']);
-          $state = mysqli_real_escape_string($conn, $_POST['state']);
-          $local = mysqli_real_escape_string($conn, $_POST['local']);
-          $religion = mysqli_real_escape_string($conn, $_POST['religion']);
-          $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
-          $email = mysqli_real_escape_string($conn, $_POST['email']);
+        try {
+          if (isset($_POST['register'])) {
+            $station_id = mysqli_real_escape_string($conn, $_POST['station_id']);
+            $employee_id = mysqli_real_escape_string($conn, $_POST['adm_number']);
+            $surname = mysqli_real_escape_string($conn, $_POST['surname']);
+            $othername = mysqli_real_escape_string($conn, $_POST['othername']);
+            $sex = mysqli_real_escape_string($conn, $_POST['sex']);
+            $dob = mysqli_real_escape_string($conn, $_POST['dob']);
+            $state = mysqli_real_escape_string($conn, $_POST['state']);
+            $local = mysqli_real_escape_string($conn, $_POST['local']);
+            $religion = mysqli_real_escape_string($conn, $_POST['religion']);
+            $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
+            $email = mysqli_real_escape_string($conn, $_POST['email']);
+            $passw = mysqli_real_escape_string($conn, md5($_POST['pass']));
 
-          $sql = "INSERT INTO station_manager(employee_id,
-  surname,
-  othername,
-  sex,
-  dob,
-  state_origin,
-  local_government,
-  religion,
-  phonenumber,
-  email,
-  station_id
-  )
-VALUES('$employee_id',
-  '$surname',
-  '$othername',
-  '$sex',
-  '$dob',
-  '$state',
-  '$local',
-  '$religion',
-  '$phone_number',
-  '$email',
-  '$station_id')";
+            $sql = "INSERT INTO station_manager(employee_id,
+                  surname,
+                  othername,
+                  sex,
+                  dob,
+                  state_origin,
+                  local_government,
+                  religion,
+                  phonenumber,
+                  email,
+                  password,
+                  station_id
+                  )
+                VALUES('$employee_id',
+                  '$surname',
+                  '$othername',
+                  '$sex',
+                  '$dob',
+                  '$state',
+                  '$local',
+                  '$religion',
+                  '$phone_number',
+                  '$email',
+                  '$passw',
+                  '$station_id')";
 
-          if (mysqli_query($conn, $sql)) {
-            $message = "Station Manager added Successfully...";
-          } else {
-            die("ERROR: You cannot have same Staff number for two Stations");
+            if (mysqli_query($conn, $sql)) {
+              $message = "Station Manager added Successfully...";
+            } else {
+              $message = "";
+            }
+
+            mysqli_close($conn);
           }
-
-
-          mysqli_close($conn);
+        } catch (Exception $th) {
+          echo "<h2 class='text-danger text-center'>ERROR: You cannot have same Staff number for two Stations</h2>";
+          exit();
         }
-
-
-
-
-
 
         ?>
 
@@ -365,47 +367,46 @@ VALUES('$employee_id',
           <div class="form-group">
             <label class="control-label col-sm-2" for="state">State of Origin:</label>
             <div class="col-sm-10">
-              <select name="state" class="form-control" required>
-                <option> --Choose state-------</option>
-
-                <option value="Adamawa"> Adamawa</option>
-                <option value="Abia"> Abia </option>
-                <option value="Anambra"> Anambra</option>
-                <option value="akwaibom"> Akwaibom</option>
-                <option value="benue"> Benue </option>
-                <option value="borno"> Borno</option>
-                <option value="bauchi"> Bauchi </option>
-                <option value="bayelsa"> Bayelsa</option>
-                <option value="crossriver"> Cross River</option>
-                <option value="delta"> Delta</option>
-                <option value="ebonyi"> Ebonyi</option>
-                <option value="edo"> Edo</option>
-                <option value="ekiti"> Ekiti</option>
-                <option value="enugu"> Enugu</option>
-                <option value="gombe"> Gombe</option>
-                <option value="imo"> Imo</option>
-                <option value="jigawa"> Jigawa</option>
-                <option value="kaduna"> Kaduna</option>
-                <option value="kano">Kano </option>
-                <option value="kwara">Kwara</option>
-                <option value="katsina">Katsina</option>
-                <option value="kogi">Kogi</option>
-                <option value="kebbi">Kebbi</option>
-                <option value="lagos"> Lagos </option>
-                <option value="niger"> Niger </option>
-                <option value="nassarawa"> Nassarawa </option>
-                <option value="ogun"> Ogun</option>
-                <option value="oyo"> Oyo</option>
-                <option value="osun"> Osun</option>
-                <option value="ondo"> Ondo </option>
-                <option value="plateau"> Plateau </option>
-                <option value="river"> River </option>
-                <option value="sokoto"> Sokoto </option>
-                <option value="taraba"> Taraba</option>
-                <option value="yobe"> Yobe </option>
-                <option value="zamfara"> Zamfara </option>
-                <option value="buja"> Abuja </option>
-              </select>
+               <select required name="state" id="state" class="select-state form-control">
+            <option value="" selected="selected">-- State --</option>
+            <option value="Abia">Abia</option>
+            <option value="Adamawa">Adamawa</option>
+            <option value="AkwaIbom">Akwa Ibom</option>
+            <option value="Anambra">Anambra</option>
+            <option value="Bauchi">Bauchi</option>
+            <option value="Bayelsa">Bayelsa</option>
+            <option value="Benue">Benue</option>
+            <option value="Borno">Borno</option>
+            <option value="Cross River">Cross River</option>
+            <option value="Delta">Delta</option>
+            <option value="Ebonyi">Ebonyi</option>
+            <option value="Edo">Edo</option>
+            <option value="Ekiti">Ekiti</option>
+            <option value="Enugu">Enugu</option>
+            <option value="Gombe">Gombe</option>
+            <option value="Imo">Imo</option>
+            <option value="Jigawa">Jigawa</option>
+            <option value="Kaduna">Kaduna</option>
+            <option value="Kano">Kano</option>
+            <option value="Katsina">Katsina</option>
+            <option value="Kebbi">Kebbi</option>
+            <option value="Kogi">Kogi</option>
+            <option value="Kwara">Kwara</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Nasarawa">Nasarawa</option>
+            <option value="Niger">Niger</option>
+            <option value="Ogun">Ogun</option>
+            <option value="Ondo">Ondo</option>
+            <option value="Osun">Osun</option>
+            <option value="Oyo">Oyo</option>
+            <option value="Plateau">Plateau</option>
+            <option value="Rivers">Rivers</option>
+            <option value="Sokoto">Sokoto</option>
+            <option value="Taraba">Taraba</option>
+            <option value="Yobe">Yobe</option>
+            <option value="Zamfara">Zamfara</option>
+            <option value="FCT">FCT</option>
+          </select>
             </div>
           </div>
 
@@ -414,7 +415,9 @@ VALUES('$employee_id',
           <div class="form-group">
             <label class="control-label col-sm-2" for="log">Local Government:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="local" required placeholder="Local government">
+              <select name="local" id="lga" class="select-lga form-control" required>
+            <option value="">LGA</option>
+          </select>
             </div>
           </div>
 
@@ -450,6 +453,12 @@ VALUES('$employee_id',
             </div>
           </div>
 
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="Password">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" name="pass" required placeholder="Password">
+            </div>
+          </div>
 
 
 
@@ -473,6 +482,7 @@ VALUES('$employee_id',
 
 
 
+    <script src="js/state-capital.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script>

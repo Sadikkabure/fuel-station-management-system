@@ -23,6 +23,41 @@ $fetch = mysqli_fetch_array($profile);
   <link rel="stylesheet" href="css/ionicons.min.css">
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <link rel="stylesheet" href="css/_all-skins.min.css">
+  <style>
+    .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 30px;
+    }
+
+    .card {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #444;
+    }
+
+    .card p {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 10px;
+        color: #007bff;
+    }
+  </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -181,12 +216,12 @@ $fetch = mysqli_fetch_array($profile);
           <li>
 
           <li>
-            <!-- <a href="m_report.php">
+            <a href="m_report.php">
             <i class="fa fa-files-o"></i> <span>Maintenance Report</span>
             <span class="pull-right-container">
             
             </span>
-          </a> -->
+          </a>
           </li>
           <li>
 
@@ -215,63 +250,70 @@ $fetch = mysqli_fetch_array($profile);
 
       </section>
     </aside>
+
     <div class="content-wrapper">
-      <section class="content">
-        <h2 align="center" style="color:red;"> DASHBOARD</h2>
-        <table class="table table-bordered table-condensed table-hover">
+    <section class="content">
+        <h2 align="center" style="color:red;">DASHBOARD</h2>
 
-          <?php
-          require __DIR__ . "/config/database.php";
-          $sql = "select  count(*) as total  from station_manager ";
-          $query = mysqli_query($conn, $sql);
-          $data = mysqli_fetch_assoc($query);
+        <?php
+        require __DIR__ . "/config/database.php";
 
-          $sql4 = "select  count(*) as total4  from maintenance_manager";
-          $query4 = mysqli_query($conn, $sql4);
-          $data4 = mysqli_fetch_assoc($query4);
+        $sql = "SELECT COUNT(*) as total FROM station_manager";
+        $query = mysqli_query($conn, $sql);
+        $data = mysqli_fetch_assoc($query);
 
-          $sql6 = "select  count(*) as total6  from tankers";
-          $query6 = mysqli_query($conn, $sql6);
-          $data6 = mysqli_fetch_assoc($query6);
+        $sql4 = "SELECT COUNT(*) as total4 FROM maintenance_manager";
+        $query4 = mysqli_query($conn, $sql4);
+        $data4 = mysqli_fetch_assoc($query4);
 
-          $sql8 = "select  count(*) as total8  from stations";
-          $query8 = mysqli_query($conn, $sql8);
-          $data8 = mysqli_fetch_assoc($query8);
+        $sql6 = "SELECT COUNT(*) as total6 FROM tankers";
+        $query6 = mysqli_query($conn, $sql6);
+        $data6 = mysqli_fetch_assoc($query6);
 
+        $sql8 = "SELECT COUNT(*) as total8 FROM stations";
+        $query8 = mysqli_query($conn, $sql8);
+        $data8 = mysqli_fetch_assoc($query8);
 
-          $sql9 = "select  count(*) as total9  from employees";
-          $query9 = mysqli_query($conn, $sql9);
-          $data9 = mysqli_fetch_assoc($query9);
-          ?>
-
-          <tr class="danger">
-            <th><b>Total Number of Station Manager</b></th>
-            <td><?php echo $data['total'] ?></td>
-          </tr>
-          <tr class="danger">
-            <th><b>Total Number of Maintenance Manager</b></th>
-            <td><?php echo $data4['total4'] ?></td>
-          </tr>
-          <tr class="danger">
-            <th><b>Total Number of Tankers</b></th>
-            <td><?php echo $data6['total6'] ?></td>
-          </tr>
-
-
-          <tr class="danger">
-            <th><b>Total Number of Stations</b></th>
-            <td><?php echo $data8['total8'] ?></td>
-          </tr>
-
-          <tr class="danger">
-            <th><b>Total Number of Employees</b></th>
-            <td><?php echo $data9['total9'] ?></td>
-          </tr>
-        </table>
+        $sql9 = "SELECT COUNT(*) as total9 FROM employees";
+        $query9 = mysqli_query($conn, $sql9);
+        $data9 = mysqli_fetch_assoc($query9);
+        ?>
+    
+        <div class="dashboard-cards">
+          <div class="card">
+            <h3>Station Managers</h3>
+            <p>
+              <?php echo $data['total']; ?>
+            </p>
+          </div>
+          <div class="card">
+            <h3>Maintenance Managers</h3>
+            <p>
+              <?php echo $data4['total4']; ?>
+            </p>
+          </div>
+          <div class="card">
+            <h3>Tankers</h3>
+            <p>
+              <?php echo $data6['total6']; ?>
+            </p>
+          </div>
+          <div class="card">
+            <h3>Stations</h3>
+            <p>
+              <?php echo $data8['total8']; ?>
+            </p>
+          </div>
+          <div class="card">
+            <h3>Employees</h3>
+            <p>
+              <?php echo $data9['total9']; ?>
+            </p>
+          </div>
+        </div>
       </section>
-
-
     </div>
+    
 
     <footer class="main-footer">
       <div class="pull-right hidden-xs">

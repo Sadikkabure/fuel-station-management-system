@@ -142,7 +142,7 @@ INSERT INTO `maintenance_manager` (`ID`, `maintenancemanager_id`, `surname`, `ot
 CREATE TABLE `petrol_sales` (
   `SN` int(11) NOT NULL,
   `station_id` int(11) NOT NULL,
-  `litre_sold` int(11) NOT NULL,
+  `litre_sold,` int(11) NOT NULL,
   `litre_price` int(11) NOT NULL,
   `total_sales` int(11) NOT NULL,
   `available_litre` int(11) NOT NULL,

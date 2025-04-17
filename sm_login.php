@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
   $password = mysqli_real_escape_string($conn, $_POST['password']);
 
 
-  $query = "SELECT * FROM stations where station_id='$username' AND password='" . md5($password) . "'";
+  $query = "SELECT * FROM station_manager where station_id='$username' AND password='" . md5($password) . "'";
   $result = mysqli_query($conn, $query);
   if ($user_data = mysqli_fetch_assoc($result)) {
     $_SESSION['station'] = $user_data;
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="css/form-elements.css">
 </head>
 
-<body style="background-image: url('images/mt_1.jpg');">
+<body style="background-image: url('images/mt_1.jpg');background-position: top;background-repeat: no-repeat;background-size: cover;">
   <header class="main-header">
     <nav class="navbar navbar-static-top">
 

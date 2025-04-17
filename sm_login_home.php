@@ -6,9 +6,9 @@ if (!$_SESSION['station']) {
   die();
 }
 
-$user = $_SESSION['station'];
+$user = $_SESSION['station']['station_id'];
 $profile = mysqli_query($conn, "select * from employees");
-$fetch = mysqli_fetch_array($profile);
+$fetch = mysqli_fetch_assoc($profile);
 
 ?>
 <!DOCTYPE html>
