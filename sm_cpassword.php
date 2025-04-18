@@ -1,32 +1,53 @@
 <?php
 session_start();
+require __DIR__ . "/config/database.php";
 
 if (!$_SESSION['station']) {
   header("Location:sm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['station'];
-$profile = mysqli_query($conn, "select * from station_manager where station_id='$user'");
-$fetch = mysqli_fetch_array($profile);
+$user = $_SESSION['station']['station_id'];
+$profile = mysqli_query($conn, "SELECT * from station_manager where station_id='$user'");
+$fetch = mysqli_fetch_assoc($profile);
+
 
 
 if (isset($_POST['submit'])) {
 
-  $confirmpassword = mysqli_real_escape_string($conn, $_POST['c_password']);
-  $confirmpassword = stripslashes($_POST['c_password']);
-  $password = mysqli_real_escape_string($conn, $_POST['password']);
-  $password = stripslashes($_POST['password']);
-  if (md5($confirmpassword) !== md5($password)) {
-    $error = 'Password does not match';
-  } else {
+  try {
 
-    $confirmpass = md5($confirmpassword);
+    $email = $_SESSION['station']['email'];
 
-    $sql = "Update stations set password='$confirmpass' where station_id ='$user'";
-    $query = mysqli_query($conn, $sql);
-    $sus = "Password Sucessfully Changed";
+    $old_password = mysqli_real_escape_string($conn, trim(md5($_POST['o_password'])));
+
+    $query = "SELECT email, password FROM station_manager WHERE email = '$email' AND password = '$old_password'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+
+      $confirmpassword = mysqli_real_escape_string($conn, $_POST['c_password']);
+      $confirmpassword = stripslashes(trim($_POST['c_password']));
+      $password = mysqli_real_escape_string($conn, $_POST['password']);
+      $password = stripslashes(trim($_POST['password']));
+
+      if (md5($confirmpassword) !== md5($password)) {
+        $error = 'Password does not match';
+      } else {
+        $current_password = md5($confirmpassword);
+
+        $sql = "UPDATE station_manager SET password = '$current_password' WHERE email ='$user'";
+        $query = mysqli_query($conn, $sql);
+        $success = "Password Sucessfully Changed";
+
+      }
+    } else {
+      $error = 'Old password is incorrect';
+    }
+  } catch (\Throwable $th) {
+    throw $th;
   }
+
+
 }
 
 ?>

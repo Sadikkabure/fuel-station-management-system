@@ -5,15 +5,9 @@ if (!$_SESSION['station']) {
   header("Location:sm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['station'];
-$profile = mysqli_query($conn, "select * from station_manager where station_id='$user'");
-$fetch = mysqli_fetch_array($profile);
-
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+$user = $_SESSION['station']['station_id'];
+$profile = mysqli_query($conn, "SELECT * from station_manager where station_id='$user'");
+$fetch = mysqli_fetch_assoc($profile);
 
 
 $query = "select * from tankers";
@@ -194,7 +188,7 @@ $drivers = mysqli_query($conn, $query);
           $tanke = mysqli_real_escape_string($conn, $_POST['tanker']);
           $product = mysqli_real_escape_string($conn, $_POST['product']);
           $quantitylifted = mysqli_real_escape_string($conn, $_POST['quantitylifted']);
-          $quantityreceived = mysqli_real_escape_string($conn, $_POST['quantityreceived']);
+          $quantity_received = mysqli_real_escape_string($conn, $_POST['quantity_received']);
           $shortage = mysqli_real_escape_string($conn, $_POST['shortage']);
           $drivername = mysqli_real_escape_string($conn, $_POST['dname']);
           $stats = mysqli_real_escape_string($conn, $_POST['stats']);
@@ -206,7 +200,7 @@ $drivers = mysqli_query($conn, $query);
   tanker,
   product,
   quantitylifted,
-  quantityreceived,
+  quantity_received,
   shortage,
   driver_name,
   status)
@@ -216,7 +210,7 @@ VALUES('$entry_id',
   '$tanke',
   '$product',
   '$quantitylifted',
-  '$quantityreceived',
+  '$quantity_received',
   '$shortage',
   '$drivername',
   '$stats')";
@@ -225,7 +219,6 @@ VALUES('$entry_id',
 
             $message = "Arrival Entries Record added Successfully...";
           } else {
-            die(mysqli_error($conn));
             echo "ERROR: Review  the details  ";
           }
 
@@ -310,9 +303,9 @@ VALUES('$entry_id',
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="quantityreceived">Quantity Received</label>
+            <label class="control-label col-sm-2" for="quantity_received">Quantity Received</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="quantityreceived" required id="q_received" placeholder="Quantity Received" oninput="calculate()">
+              <input type="text" class="form-control" name="quantity_received" required id="q_received" placeholder="Quantity Received" oninput="calculate()">
             </div>
           </div>
 

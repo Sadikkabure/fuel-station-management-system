@@ -5,15 +5,10 @@ if (!$_SESSION['station']) {
   header("Location:sm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['station'];
-$profile = mysqli_query($conn, "select * from station_manager where station_id='$user'");
-$fetch = mysqli_fetch_array($profile);
+$user = $_SESSION['station']['station_id'];
+$profile = mysqli_query($conn, "SELECT * from station_manager where station_id='$user'");
+$fetch = mysqli_fetch_assoc($profile);
 
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html>

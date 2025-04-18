@@ -7,7 +7,7 @@ if (!$_SESSION['station']) {
 }
 
 $user = $_SESSION['station']['station_id'];
-$profile = mysqli_query($conn, "select * from station_manager where station_id='$user'");
+$profile = mysqli_query($conn, "SELECT * from station_manager where station_id='$user'");
 $fetch = mysqli_fetch_assoc($profile);
 
 
@@ -176,14 +176,14 @@ $fetch = mysqli_fetch_assoc($profile);
         <?php
         if (isset($_POST['register'])) {
           $s_id = mysqli_real_escape_string($conn, $_POST['s_id']);
-          $l_sold = mysqli_real_escape_string($conn, $_POST['l_sold']);
+          $litre_sold = mysqli_real_escape_string($conn, $_POST['litre_sold']);
           $a_litre = mysqli_real_escape_string($conn, $_POST['a_litre']);
-          $l_price = mysqli_real_escape_string($conn, $_POST['l_price']);
+          $litre_price = mysqli_real_escape_string($conn, $_POST['litre_price']);
           $totalsales = mysqli_real_escape_string($conn, $_POST['totalsales']);
           $date = mysqli_real_escape_string($conn, $_POST['date']);
 
 
-          $sql = "Insert into petrol_sales(
+          $sql = "INSERT into petrol_sales(
   station_id,
   litre_sold,
   available_litre,
@@ -191,16 +191,14 @@ $fetch = mysqli_fetch_assoc($profile);
   total_sales,
   date)
 VALUES('$s_id',
-  '$l_sold',
+  '$litre_sold',
   '$a_litre',
-  '$l_price',
+  '$litre_price',
   '$totalsales',
   '$date')";
 
 
-          mysqli_query($conn, "
-               
-        Update arrival_entries  set quantityreceived='$a_litre' where station_id='$user' and status='Active' and quantityreceived > 0");
+        mysqli_query($conn, "UPDATE arrival_entries SET quantity_received = '$a_litre' where station_id='$user' and status ='Active' and quantity_received > 0");
 
 
           if (mysqli_query($conn, $sql)) {
@@ -249,7 +247,7 @@ VALUES('$s_id',
           <div class="form-group">
             <label class="control-label col-sm-2" for="litres sold">Litres Sold</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control variable-field quantity" id="litres_sold" name="l_sold"
+              <input type="number" class="form-control variable-field quantity" id="litres_sold" name="litre_sold"
                 oninput="calculate()">
             </div>
           </div>
@@ -262,7 +260,7 @@ VALUES('$s_id',
           <div class="form-group">
             <label class="control-label col-sm-2" for="log">Litre price</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control variable-field costpriceunit" id="litres_price" name="l_price"
+              <input type="text" class="form-control variable-field costpriceunit" id="litres_price" name="litre_price"
                 value="<?php echo "$litre_price[petrol_price]"; ?>" readonly required>
             </div>
           </div>
@@ -286,10 +284,10 @@ VALUES('$s_id',
 
           <center> <input type="submit" class="btn btn-success" value="Register" name="register"></center>
 
-          <!-- <?php
-          // $getRecord = mysqli_query($conn, "select * from arrival_entries where station_id='$user' AND status = 'Active'");
-          // $arrival = mysqli_fetch_array($getRecord);
-          // $x = "$arrival[quantityreceived]";
+          <?php
+          $getRecord = mysqli_query($conn, "select * from arrival_entries where station_id='$user' AND status = 'Active'");
+          $arrival = mysqli_fetch_array($getRecord);
+          $x = "$arrival[quantity_received]";
 
           ?>
 
@@ -298,9 +296,9 @@ VALUES('$s_id',
             <label class="control-label col-sm-2">Available Litres </label>
             <div class="col-sm-10">
               <input type="text" class="form-control" name="a_litre" required id="availablelitres" readonly
-                value="<?php # echo "$x"; ?>">
+                value="<?php echo "$x"; ?>">
             </div>
-          </div> -->
+          </div>
 
 
 

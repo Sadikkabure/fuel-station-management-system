@@ -5,9 +5,8 @@ if (!$_SESSION['station']) {
   header("Location:sm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['station'];
-$profile = mysqli_query($conn, "select * from station_manager where station_id='$user'");
+$user = $_SESSION['station']['station_id'];
+$profile = mysqli_query($conn, "SELECT * from station_manager where station_id='$user'");
 $fetch = mysqli_fetch_array($profile);
 
 ?>
@@ -194,10 +193,10 @@ $fetch = mysqli_fetch_array($profile);
                 echo '<tr>';
 
                 echo "<td class=''>$record[station_id]</td>";
-                echo "<td class=''>$record[litres_sold]</td>";
+                echo "<td class=''>$record[litre_sold]</td>";
                 echo "<td class=''>$record[litre_price]</td>";
                 echo "<td class=''>$record[total_sales]</td>";
-                echo "<td class=''>$record[available_litres]</td>";
+                echo "<td class=''>$record[available_litre]</td>";
                 echo "<td class=''>$record[date]</td>";
 
 

@@ -51,7 +51,9 @@ error_reporting(E_ALL);
 
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -85,7 +87,9 @@ error_reporting(E_ALL);
           <div class="pull-left info">
             <p>Station Manager </p>
 
-            <a href="#"> <?php echo "$fetch[station_id]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
+            <a href="#">
+              <?php echo "$fetch[station_id]"; ?> <i class="fa fa-circle text-success"></i> Online
+            </a>
           </div>
         </div>
         <form action="#" method="get" class="sidebar-form">
@@ -203,11 +207,11 @@ error_reporting(E_ALL);
                 echo "<td class=''>$record[tanker]</td>";
                 echo "<td class=''>$record[product]</td>";
                 echo "<td class=''>$record[quantitylifted]</td>";
-                echo "<td class=''>$record[quantityreceived]</td>";
+                echo "<td class=''>$record[quantity_received]</td>";
                 echo "<td class=''>$record[shortage]</td>";
                 echo "<td class=''>$record[dateofentry]</td>";
                 // echo"<td class=''>$record[status]</td>";  
-
+            
                 echo '<td class="">
 
 
@@ -232,7 +236,7 @@ error_reporting(E_ALL);
 
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
           <script>
-            $('.toggle-switch button').click(function() {
+            $('.toggle-switch button').click(function () {
               if ($(this).hasClass('locked-active') || $(this).hasClass('unlocked-inactive')) {
                 $('#switch_status').html('Switched on.');
                 $(this).parent('.toggle-switch').find('.check').prop('checked', true);

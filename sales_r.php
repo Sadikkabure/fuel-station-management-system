@@ -5,10 +5,9 @@ if (!$_SESSION['station']) {
   header("Location:sm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
-$user = $_SESSION['station'];
+$user = $_SESSION['station']['station_id'];
 $profile = mysqli_query($conn, "select * from station_manager where station_id='$user'");
-$fetch = mysqli_fetch_array($profile);
+$fetch = mysqli_fetch_assoc($profile);
 
 ?>
 <!DOCTYPE html>
@@ -108,7 +107,7 @@ $fetch = mysqli_fetch_array($profile);
               </span>
             </a>
             <ul class="treeview-menu">
-              <!-- <li ><a href="n_sales.php"><i class="fa fa-user-plus"></i>Add Petrol Sales</a></li>  -->
+              <li ><a href="n_sales.php"><i class="fa fa-user-plus"></i>Add Petrol Sales</a></li> 
               <li><a href="gas_sales.php"><i class="fa fa-user-plus"></i>Add Gas Sales</a></li>
               <li><a href="sales_r.php"><i class="fa fa-group"></i>Petrol Sales Report</a></li>
               <li><a href="gas_sales_r.php"><i class="fa fa-group"></i>Gas Sales Report</a></li>
@@ -183,8 +182,7 @@ $fetch = mysqli_fetch_array($profile);
 
 
             <?php
-            require __DIR__ . "/config/database.php";
-            $getRecords_string = "select * from petrol_sales where station_id='$user'";
+            $getRecords_string = "SELECT * from petrol_sales where station_id='$user'";
 
             $getRecord = mysqli_query($conn, $getRecords_string);
             $num_of_record = mysqli_num_rows($getRecord);
@@ -194,10 +192,10 @@ $fetch = mysqli_fetch_array($profile);
                 echo '<tr>';
 
                 echo "<td class=''>$record[station_id]</td>";
-                echo "<td class=''>$record[litres_sold]</td>";
+                echo "<td class=''>$record[litre_sold]</td>";
                 echo "<td class=''>$record[litre_price]</td>";
                 echo "<td class=''>$record[total_sales]</td>";
-                echo "<td class=''>$record[available_litres]</td>";
+                echo "<td class=''>$record[available_litre]</td>";
                 echo "<td class=''>$record[date]</td>";
 
 

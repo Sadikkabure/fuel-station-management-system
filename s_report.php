@@ -1,14 +1,14 @@
 <?php
+require __DIR__ . "/config/database.php";
 session_start();
 
 if (!$_SESSION['data']) {
   header("Location:admin.php");
   die();
 }
-require __DIR__ . "/config/database.php";
 $user = $_SESSION['data'];
-$profile = mysqli_query($conn, "select * from admin where email='$user'");
-$fetch = mysqli_fetch_array($profile);
+$profile = mysqli_query($conn, "SELECT * from admin where email='$user'");
+$fetch = mysqli_fetch_assoc($profile);
 ?>
 <!DOCTYPE html>
 <html>
@@ -245,8 +245,7 @@ $fetch = mysqli_fetch_array($profile);
 
 
               <?php
-              require __DIR__ . "/config/database.php";
-              $getRecords_string = "select * from petrol_sales order by SN ";
+              $getRecords_string = "SELECT * from petrol_sales order by SN";
               $getRecord = mysqli_query($conn, $getRecords_string);
               $num_of_record = mysqli_num_rows($getRecord);
               if ($num_of_record > 0) {
@@ -256,16 +255,15 @@ $fetch = mysqli_fetch_array($profile);
 
                   echo "<td class=''>$record[SN]</td>";
                   echo "<td class=''>$record[station_id]</td>";
-                  echo "<td class=''>$record[litres_sold]</td>";
+                  echo "<td class=''>$record[litre_sold]</td>";
                   echo "<td class=''>$record[litre_price]</td>";
                   echo "<td class=''>$record[total_sales]</td>";
-                  echo "<td class=''>$record[available_litres]</td>";
+                  echo "<td class=''>$record[available_litre]</td>";
 
                   echo "<td class=''>$record[date]</td>";
                   echo '</tr>';
                 }
               } else {
-                die(mysql_error($conn));
                 echo "<h6>Loading..........</h6>";
               }
 

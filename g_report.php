@@ -1,14 +1,14 @@
 <?php
+require __DIR__ . "/config/database.php";
 session_start();
 
 if (!$_SESSION['data']) {
   header("Location:admin.php");
   die();
 }
-require __DIR__ . "/config/database.php";
 $user = $_SESSION['data'];
-$profile = mysqli_query($conn, "select * from admin where email='$user'");
-$fetch = mysqli_fetch_array($profile);
+$profile = mysqli_query($conn, "SELECT * from admin where email='$user'");
+$fetch = mysqli_fetch_assoc($profile);
 ?>
 <!DOCTYPE html>
 <html>
@@ -255,10 +255,10 @@ $fetch = mysqli_fetch_array($profile);
 
                   echo "<td class=''>$record[SN]</td>";
                   echo "<td class=''>$record[station_id]</td>";
-                  echo "<td class=''>$record[litres_sold]</td>";
+                  echo "<td class=''>$record[litre_sold]</td>";
                   echo "<td class=''>$record[litre_price]</td>";
                   echo "<td class=''>$record[total_sales]</td>";
-                  echo "<td class=''>$record[available_litres]</td>";
+                  echo "<td class=''>$record[available_litre]</td>";
 
                   echo "<td class=''>$record[date]</td>";
                   echo '</tr>';
@@ -267,7 +267,6 @@ $fetch = mysqli_fetch_array($profile);
 
                 echo "<h5>Loading..........</h5>";
                 echo "<h5>No Reports</h5>";
-                // die(mysql_error($conn));
               }
 
 
