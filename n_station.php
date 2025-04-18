@@ -309,7 +309,7 @@ VALUES(
 
                 <option value="NNPC">NNPC</option>
                 <option value="MRS"> MRS</option>
-                <option value="BUNGEL NIG LTD"> BUNGEL NIG LTD</option>
+                <option value="BUNGEL NIG LTD"> KABURIYE & SONS NIG LTD</option>
               </select>
             </div>
           </div>
