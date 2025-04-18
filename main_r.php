@@ -7,8 +7,8 @@ if (!$_SESSION['maintenance']) {
 }
 require __DIR__ . "/config/database.php";
 $user = $_SESSION['maintenance'];
-$profile = mysqli_query($conn, "select * from maintenance_manager where maintenancemanager_id ='$user'");
-$fetch = mysqli_fetch_array($profile);
+$profile = mysqli_query($conn, "SELECT * from maintenance_manager where maintenancemanager_id ='$user'");
+$fetch = mysqli_fetch_assoc($profile);
 
 
 
@@ -17,7 +17,7 @@ $fetch = mysqli_fetch_array($profile);
 <html>
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8">   
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Maintenance Manager</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -45,7 +45,7 @@ $fetch = mysqli_fetch_array($profile);
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
                 <span class="hidden-xs">
-                  <?php echo "$fetch[email]"; ?>
+                  <?php echo "$fetch[employee_name]"; ?>
                 </span>
               </a>
               <ul class="dropdown-menu">

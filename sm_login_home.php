@@ -42,7 +42,9 @@ $fetch = mysqli_fetch_assoc($profile);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -76,7 +78,9 @@ $fetch = mysqli_fetch_assoc($profile);
           <div class="pull-left info">
             <p>Station Manager </p>
 
-            <a href="#"> <?php echo "$fetch[station_id]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
+            <a href="#">
+              <?php echo "$fetch[surname]"; ?> <i class="fa fa-circle text-success"></i> Online
+            </a>
           </div>
         </div>
         <form action="#" method="get" class="sidebar-form">
@@ -99,7 +103,7 @@ $fetch = mysqli_fetch_assoc($profile);
               </span>
             </a>
             <ul class="treeview-menu">
-              <!-- <li ><a href="n_sales.php"><i class="fa fa-user-plus"></i>Add Petrol Sales</a></li>  -->
+              <li><a href="n_sales.php"><i class="fa fa-user-plus"></i>Add Petrol Sales</a></li>
               <li><a href="gas_sales.php"><i class="fa fa-user-plus"></i>Add Gas Sales</a></li>
               <li><a href="sales_r.php"><i class="fa fa-group"></i>Petrol Sales Report</a></li>
               <li><a href="gas_sales_r.php"><i class="fa fa-group"></i>Gas Sales Report</a></li>
@@ -163,7 +167,8 @@ $fetch = mysqli_fetch_assoc($profile);
           <tr class="success">
 
             <th> Employee ID </th>
-            <td> <?php echo "$fetch[employee_id]"; ?>
+            <td>
+              <?php echo "$fetch[employee_id]"; ?>
             </td>
 
           </tr>
@@ -171,36 +176,50 @@ $fetch = mysqli_fetch_assoc($profile);
 
           <tr class="info">
             <th> Surname</th>
-            <td> <?php echo "$fetch[surname]"; ?></td>
+            <td>
+              <?php echo "$fetch[surname]"; ?>
+            </td>
 
           </tr>
           <tr>
             <th> Othername</th>
-            <td> <?php echo "$fetch[othername]"; ?></td>
+            <td>
+              <?php echo "$fetch[othername]"; ?>
+            </td>
           </tr>
           <tr class="warning">
             <th> Sex</th>
-            <td> <?php echo "$fetch[sex]"; ?></td>
+            <td>
+              <?php echo "$fetch[sex]"; ?>
+            </td>
           </tr>
 
           <tr>
             <th> Email</th>
-            <td> <?php echo "$fetch[email]"; ?></td>
+            <td>
+              <?php echo "$fetch[email]"; ?>
+            </td>
           </tr>
 
           <tr class="danger">
             <th>Phonenumber </th>
-            <td> <?php echo "$fetch[phonenumber]"; ?></td>
+            <td>
+              <?php echo "$fetch[phonenumber]"; ?>
+            </td>
           </tr>
           </tr>
           <tr class="info">
             <th> Date of Birth</th>
-            <td> <?php echo "$fetch[dob]"; ?></td>
+            <td>
+              <?php echo "$fetch[dob]"; ?>
+            </td>
 
           </tr>
           <tr>
             <th> State of Origin</th>
-            <td> <?php echo "$fetch[state_origin]"; ?></td>
+            <td>
+              <?php echo "$fetch[state_origin]"; ?>
+            </td>
 
 
 

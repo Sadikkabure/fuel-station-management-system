@@ -328,7 +328,7 @@ a:hover, a:focus, a:active {
 }
 
 .footer-top {
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
   height: 40px;
 }
 
@@ -363,7 +363,7 @@ a:hover, a:focus, a:active {
   content: "";
   height: 1px;
   display: block;
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
   width: 150px;
   margin: 15px auto;
 }
@@ -372,7 +372,7 @@ a:hover, a:focus, a:active {
 }
 
 .footer-bottom {
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
   padding: 3px;
 }
 
@@ -380,7 +380,7 @@ a:hover, a:focus, a:active {
   margin-bottom: 5px;
 }
 .footer-form .form-control {
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
   color: #fff;
   border: 0;
   border-radius: 0;
@@ -390,7 +390,7 @@ a:hover, a:focus, a:active {
 }
 .footer-form .btn-submit {
   border-radius: 0;
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
   text-transform: uppercase;
   border: 1px solid #fff;
   -moz-transition: all, 0.5s;
@@ -497,7 +497,7 @@ form .alert {
 	Module
 ========================================================================== */
 .btn-primary {
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
   border: none;
   border-radius: 0;
   padding: 10px 25px;
@@ -581,7 +581,7 @@ form .alert {
 }
 
 .table-style-2 thead {
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
   border-bottom: 1px solid #144d7b;
   color: #fff;
 }
@@ -617,7 +617,7 @@ form .alert {
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
   color: #fff;
 }
 
@@ -631,7 +631,7 @@ form .alert {
   color: #fff;
 }
 .panel-default > .panel-heading:hover {
-  background: #115c9b;
+  background: linear-gradient(to right, #282828, #505050);
 }
 
 
@@ -827,7 +827,7 @@ form .alert {
   .navbar-main li:hover .submenu li,
   .navbar-main li:active .submenu li,
   .navbar-main li:focus .submenu li {
-    background: #115c9b;
+    background: linear-gradient(to right, #282828, #505050);
     border-top-color: #1f76bd;
   }
 
