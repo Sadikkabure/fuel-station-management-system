@@ -15,7 +15,7 @@ $fetch = mysqli_fetch_assoc($profile);
 if (isset($_POST['submit'])) {
 
   try {
-    
+
     $email = $_SESSION['user']['email'];
 
     $old_password = mysqli_real_escape_string($conn, trim(md5($_POST['o_password'])));
@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
-      
+
       $confirmpassword = mysqli_real_escape_string($conn, $_POST['c_password']);
       $confirmpassword = stripslashes(trim($_POST['c_password']));
       $password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -174,20 +174,24 @@ if (isset($_POST['submit'])) {
 
 
         <form class="form-horizontal" role="form" method="post">
-            <?php
-              if(isset($error)){
-                ?>
-                <p style="color:red;text-align:center;margin:14px;"><?= $error; ?></p>
-                <?php
-              }
+          <?php
+          if (isset($error)) {
             ?>
+            <p style="color:red;text-align:center;margin:14px;">
+              <?= $error; ?>
+            </p>
             <?php
-              if(isset($success)){
-                ?>
-                <p style="color:green;text-align:center;margin:14px;"><?= $success; ?></p>
-                <?php
-              }
+          }
+          ?>
+          <?php
+          if (isset($success)) {
             ?>
+            <p style="color:green;text-align:center;margin:14px;">
+              <?= $success; ?>
+            </p>
+            <?php
+          }
+          ?>
           </h4>
           <div class="form-group">
             <label class="control-label col-sm-2" for="o_password">Old Password</label>
@@ -226,7 +230,7 @@ if (isset($_POST['submit'])) {
       <div class="pull-right hidden-xs">
 
       </div>
-      <center> <strong>Copyright &copy; 2024 by PPMS</strong> All rights reserved.</center>
+      <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
     </footer>
 
   </div>

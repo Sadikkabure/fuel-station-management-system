@@ -89,7 +89,7 @@ $fetch = mysqli_fetch_array($profile);
                 <li class="user-body">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="admin_dashboard.php" class="btn btn-default btn-flat">Profile</a>
+                    <a href="admin_dashboard.php" class="btn btn-default btn-flat">Dashboard</a>
                   </div>
                   <div class="pull-right">
                     <a href="alogout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -131,7 +131,7 @@ $fetch = mysqli_fetch_array($profile);
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="admin_dashboard.php"><i class="fa fa-user"></i>Profile</a></li>
+              <li><a href="admin_dashboard.php"><i class="fa fa-user"></i>Dashboard</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -319,7 +319,7 @@ $fetch = mysqli_fetch_array($profile);
       <div class="pull-right hidden-xs">
 
       </div>
-      <center> <strong>Copyright &copy; 2024 by PPMS</strong> All rights reserved.</center>
+      <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
     </footer>
 
   </div>

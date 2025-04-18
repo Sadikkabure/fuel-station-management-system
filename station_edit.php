@@ -70,7 +70,9 @@ $fetch = mysqli_fetch_array($profile);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -268,7 +270,8 @@ $fetch = mysqli_fetch_array($profile);
 
           <div class="form-group">
             <label for="newstitle"><b>Station ID</b></label>
-            <input type="text" name="station_id" required class="form-control" value="<?php echo  $user_information['station_id']  ?>" />
+            <input type="text" name="station_id" required class="form-control"
+              value="<?php echo $user_information['station_id'] ?>" />
           </div>
 
 
@@ -276,18 +279,21 @@ $fetch = mysqli_fetch_array($profile);
 
           <div class="form-group">
             <label for=""><b>Address</b></label>
-            <input type="text" name="address" required class="form-control" value="<?php echo  $user_information['address']  ?>" />
+            <input type="text" name="address" required class="form-control"
+              value="<?php echo $user_information['address'] ?>" />
           </div>
 
 
           <div class="form-group">
             <label for=""><b>Petrol Price</b></label>
-            <input type="text" name="petrol_price" required class="form-control" value="<?php echo  $user_information['petrol_price']  ?>" />
+            <input type="text" name="petrol_price" required class="form-control"
+              value="<?php echo $user_information['petrol_price'] ?>" />
           </div>
 
           <div class="form-group">
             <label for=""><b>Gas Price</b></label>
-            <input type="text" name="gas_price" required class="form-control" value="<?php echo  $user_information['gas_price']  ?>" />
+            <input type="text" name="gas_price" required class="form-control"
+              value="<?php echo $user_information['gas_price'] ?>" />
           </div>
 
 
@@ -322,7 +328,7 @@ $fetch = mysqli_fetch_array($profile);
       <div class="pull-right hidden-xs">
 
       </div>
-      <center> <strong>Copyright &copy; 2024 by PPMS</strong> All rights reserved.</center>
+      <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
     </footer>
 
   </div>

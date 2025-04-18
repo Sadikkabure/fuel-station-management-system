@@ -77,7 +77,9 @@ $fetch = mysqli_fetch_array($profile);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -275,7 +277,8 @@ $fetch = mysqli_fetch_array($profile);
 
           <div class="form-group">
             <label for="newstitle"><b>Employee ID</b></label>
-            <input type="text" name="employee_id" required class="form-control" value="<?php echo  $user_information['maintenancemanager_id']  ?>" />
+            <input type="text" name="employee_id" required class="form-control"
+              value="<?php echo $user_information['maintenancemanager_id'] ?>" />
           </div>
 
 
@@ -283,30 +286,35 @@ $fetch = mysqli_fetch_array($profile);
 
           <div class="form-group">
             <label for=""><b>Surname</b></label>
-            <input type="text" name="surname" required class="form-control" value="<?php echo  $user_information['surname']  ?>" />
+            <input type="text" name="surname" required class="form-control"
+              value="<?php echo $user_information['surname'] ?>" />
           </div>
 
           <div class="form-group">
             <label for=""><b>Othername</b></label>
-            <input type="text" name="othername" required class="form-control" value="<?php echo  $user_information['othername']  ?>" />
+            <input type="text" name="othername" required class="form-control"
+              value="<?php echo $user_information['othername'] ?>" />
           </div>
 
 
           <div class="form-group">
             <label for=""><b>Sex</b></label>
-            <input type="text" name="sex" required class="form-control" value="<?php echo  $user_information['sex']  ?>" />
+            <input type="text" name="sex" required class="form-control"
+              value="<?php echo $user_information['sex'] ?>" />
           </div>
 
 
           <div class="form-group">
             <label for=""><b>Date of Birth</b></label>
-            <input type="date" name="dob" required class="form-control" value="<?php echo  $user_information['dob']  ?>" />
+            <input type="date" name="dob" required class="form-control"
+              value="<?php echo $user_information['dob'] ?>" />
           </div>
 
 
           <div class="form-group">
             <label for=""><b>State of Origin</b></label>
-            <input type="text" name="sog" required class="form-control" value="<?php echo  $user_information['state_origin']  ?>" />
+            <input type="text" name="sog" required class="form-control"
+              value="<?php echo $user_information['state_origin'] ?>" />
           </div>
 
 
@@ -314,35 +322,41 @@ $fetch = mysqli_fetch_array($profile);
 
           <div class=" form-group">
             <label for=""><b>Local</b></label>
-            <input type="text" required class="form-control" name="local" value="<?php echo  $user_information['local']  ?>" />
+            <input type="text" required class="form-control" name="local"
+              value="<?php echo $user_information['local'] ?>" />
           </div>
 
 
           <div class=" form-group">
             <label for=""><b>Religion</b></label>
-            <input type="text" required class="form-control" name="religion" value="<?php echo  $user_information['religion']  ?>" />
+            <input type="text" required class="form-control" name="religion"
+              value="<?php echo $user_information['religion'] ?>" />
           </div>
 
           <div class=" form-group">
             <label for="n"><b>Phonenumber</b></label>
-            <input type="text" required class="form-control" name="phonenumber" value="<?php echo  $user_information['phonenumber']  ?>" />
+            <input type="text" required class="form-control" name="phonenumber"
+              value="<?php echo $user_information['phonenumber'] ?>" />
           </div>
 
           <div class=" form-group">
             <label for="n"><b>Religion</b></label>
-            <input type="text" required class="form-control" name="religion" value="<?php echo  $user_information['religion']  ?>" />
+            <input type="text" required class="form-control" name="religion"
+              value="<?php echo $user_information['religion'] ?>" />
           </div>
 
 
 
           <div class=" form-group">
             <label for="n"><b>Email</b></label>
-            <input type="text" required class="form-control" name="email" value="<?php echo  $user_information['email']  ?>" />
+            <input type="text" required class="form-control" name="email"
+              value="<?php echo $user_information['email'] ?>" />
           </div>
 
           <div class=" form-group">
             <label for="n"><b>Password</b></label>
-            <input type="text" required class="form-control" name="password" value="<?php echo  $user_information['password']  ?>" />
+            <input type="text" required class="form-control" name="password"
+              value="<?php echo $user_information['password'] ?>" />
           </div>
 
 
@@ -364,7 +378,7 @@ $fetch = mysqli_fetch_array($profile);
       <div class="pull-right hidden-xs">
 
       </div>
-      <center> <strong>Copyright &copy; 2024 by PPMS</strong> All rights reserved.</center>
+      <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
     </footer>
 
   </div>

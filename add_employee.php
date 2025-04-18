@@ -46,7 +46,9 @@ error_reporting(E_ALL);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -280,7 +282,10 @@ VALUES('$employee_id',
         ?>
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
-          <h3 style="color:#F00;"> <?php if (isset($message)) echo $message; ?></h3>
+          <h3 style="color:#F00;">
+            <?php if (isset($message))
+              echo $message; ?>
+          </h3>
           <h1 align="center" style="color:green;">New Employee Registration</h1>
           <div class="form-group">
             <label class="control-label col-sm-2" for="adm_number">Employee ID</label>
@@ -353,48 +358,47 @@ VALUES('$employee_id',
 
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="state">State of Origin</label>
+            <label class="control-label col-sm-2" for="state">State of Origin:</label>
             <div class="col-sm-10">
-              <select name="state" class="form-control" required>
-                <option> --Choose state-------</option>
-
-                <option value="Adamawa"> Adamawa</option>
-                <option value="Abia"> Abia </option>
-                <option value="Anambra"> Anambra</option>
-                <option value="akwaibom"> Akwaibom</option>
-                <option value="benue"> Benue </option>
-                <option value="borno"> Borno</option>
-                <option value="bauchi"> Bauchi </option>
-                <option value="bayelsa"> Bayelsa</option>
-                <option value="crossriver"> Cross River</option>
-                <option value="delta"> Delta</option>
-                <option value="ebonyi"> Ebonyi</option>
-                <option value="edo"> Edo</option>
-                <option value="ekiti"> Ekiti</option>
-                <option value="enugu"> Enugu</option>
-                <option value="gombe"> Gombe</option>
-                <option value="imo"> Imo</option>
-                <option value="jigawa"> Jigawa</option>
-                <option value="kaduna"> Kaduna</option>
-                <option value="kano">Kano </option>
-                <option value="kwara">Kwara</option>
-                <option value="katsina">Katsina</option>
-                <option value="kogi">Kogi</option>
-                <option value="kebbi">Kebbi</option>
-                <option value="lagos"> Lagos </option>
-                <option value="niger"> Niger </option>
-                <option value="nassarawa"> Nassarawa </option>
-                <option value="ogun"> Ogun</option>
-                <option value="oyo"> Oyo</option>
-                <option value="osun"> Osun</option>
-                <option value="ondo"> Ondo </option>
-                <option value="plateau"> Plateau </option>
-                <option value="river"> River </option>
-                <option value="sokoto"> Sokoto </option>
-                <option value="taraba"> Taraba</option>
-                <option value="yobe"> Yobe </option>
-                <option value="zamfara"> Zamfara </option>
-                <option value="buja"> Abuja </option>
+              <select required name="state" id="state" class="select-state form-control">
+                <option value="" selected="selected">-- State --</option>
+                <option value="Abia">Abia</option>
+                <option value="Adamawa">Adamawa</option>
+                <option value="AkwaIbom">Akwa Ibom</option>
+                <option value="Anambra">Anambra</option>
+                <option value="Bauchi">Bauchi</option>
+                <option value="Bayelsa">Bayelsa</option>
+                <option value="Benue">Benue</option>
+                <option value="Borno">Borno</option>
+                <option value="Cross River">Cross River</option>
+                <option value="Delta">Delta</option>
+                <option value="Ebonyi">Ebonyi</option>
+                <option value="Edo">Edo</option>
+                <option value="Ekiti">Ekiti</option>
+                <option value="Enugu">Enugu</option>
+                <option value="Gombe">Gombe</option>
+                <option value="Imo">Imo</option>
+                <option value="Jigawa">Jigawa</option>
+                <option value="Kaduna">Kaduna</option>
+                <option value="Kano">Kano</option>
+                <option value="Katsina">Katsina</option>
+                <option value="Kebbi">Kebbi</option>
+                <option value="Kogi">Kogi</option>
+                <option value="Kwara">Kwara</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Nasarawa">Nasarawa</option>
+                <option value="Niger">Niger</option>
+                <option value="Ogun">Ogun</option>
+                <option value="Ondo">Ondo</option>
+                <option value="Osun">Osun</option>
+                <option value="Oyo">Oyo</option>
+                <option value="Plateau">Plateau</option>
+                <option value="Rivers">Rivers</option>
+                <option value="Sokoto">Sokoto</option>
+                <option value="Taraba">Taraba</option>
+                <option value="Yobe">Yobe</option>
+                <option value="Zamfara">Zamfara</option>
+                <option value="FCT">FCT</option>
               </select>
             </div>
           </div>
@@ -402,12 +406,13 @@ VALUES('$employee_id',
 
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="log">Local Government</label>
+            <label class="control-label col-sm-2" for="log">Local Government:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="local" required placeholder="Local government">
+              <select name="local" id="lga" class="select-lga form-control" required>
+                <option value="">LGA</option>
+              </select>
             </div>
           </div>
-
 
 
           <div class="form-group">
@@ -456,14 +461,14 @@ VALUES('$employee_id',
       <div class="pull-right hidden-xs">
 
       </div>
-      <center> <strong>Copyright &copy; 2024 by PPMS</strong> All rights reserved.</center>
+      <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
     </footer>
 
   </div>
 
 
   </div>
-
+  <script src="js/state-capital.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-ui.min.js"></script>
   <script>

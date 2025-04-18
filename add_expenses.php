@@ -42,7 +42,9 @@ $fetch = mysqli_fetch_array($profile);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -257,7 +259,10 @@ VALUES(
 
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
-          <h3 style="color:#F00;"> <?php if (isset($message)) echo $message; ?></h3>
+          <h3 style="color:#F00;">
+            <?php if (isset($message))
+              echo $message; ?>
+          </h3>
           <h1 align="center" style="color:black;">Add Expenses</h1>
 
 
@@ -265,14 +270,16 @@ VALUES(
           <div class="form-group">
             <label class="control-label col-sm-2" for="expensedescription">Station ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" readonly value="<?php echo "$fetch[station_id]"; ?>" name="station_id">
+              <input type="text" class="form-control" readonly value="<?php echo "$fetch[station_id]"; ?>"
+                name="station_id">
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="expensedescription">Expense Description</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" required name="expensedescription" placeholder="Expense Description">
+              <input type="text" class="form-control" required name="expensedescription"
+                placeholder="Expense Description">
             </div>
           </div>
 
@@ -281,7 +288,8 @@ VALUES(
           <div class="form-group">
             <label class="control-label col-sm-2" for="Literamount">Liters:</label>
             <div class="col-sm-10">
-              <input type="number" id="litres_sold" class="form-control" name="literamount" required placeholder="Liters" oninput="calculate()">
+              <input type="number" id="litres_sold" class="form-control" name="literamount" required
+                placeholder="Liters" oninput="calculate()">
             </div>
           </div>
 
@@ -295,7 +303,8 @@ VALUES(
           <div class="form-group">
             <label class="control-label col-sm-2" for="log">Litre price</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control  variable-field costpriceunit" id="litres_price" name="l_price" readonly required>
+              <input type="number" class="form-control  variable-field costpriceunit" id="litres_price" name="l_price"
+                readonly required>
             </div>
           </div>
 
@@ -314,7 +323,7 @@ VALUES(
 
 
           <script>
-            calculate = function() {
+            calculate = function () {
               var litres_sold = document.getElementById('litres_sold').value;
               var litres_price = document.getElementById('litres_price').value;
               document.getElementById('totalexpense').value = parseInt(litres_sold) * parseInt(litres_price);
@@ -356,7 +365,7 @@ VALUES(
       <div class="pull-right hidden-xs">
 
       </div>
-      <center> <strong>Copyright &copy; 2024 by PPMS</strong> All rights reserved.</center>
+      <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
     </footer>
 
 
