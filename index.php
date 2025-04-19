@@ -157,7 +157,7 @@
 
       <!-- Copyright Notice -->
       <div>
-        <p class="mb-0">Copyright ©2022, Designed by FAHEEM</p>
+        <p class="mb-0">Copyright ©2022, Designed by Sadik_kabure & KabriAcid</p>
       </div>
     </div>
   </footer>
