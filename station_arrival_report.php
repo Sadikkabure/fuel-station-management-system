@@ -193,7 +193,7 @@ error_reporting(E_ALL);
 
             <?php
             require __DIR__ . "/config/database.php";
-            $getRecords_string = "select * from arrival_entries where station_id='$user'";
+            $getRecords_string = "SELECT * from arrival_entries where station_id='$user'";
 
             $getRecord = mysqli_query($conn, $getRecords_string);
             $num_of_record = mysqli_num_rows($getRecord);
@@ -260,7 +260,7 @@ error_reporting(E_ALL);
       <div class="pull-right hidden-xs">
 
       </div>
-      <center> <strong>Copyright &copy; 2022 by PPMS</strong> All rights reserved.</center>
+      <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
     </footer>
 
   </div>

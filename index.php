@@ -15,7 +15,7 @@
   <script src="js/modernizr-2.6.2.min.js"></script>
   <style>
     footer {
-      background: linear-gradient(to right, #282828, #505050)!important;
+      background:  #115c9b;
       /* Subtle gradient */
       color: white;
       padding: 20px 0;

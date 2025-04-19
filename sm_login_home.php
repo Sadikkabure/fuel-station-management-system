@@ -7,7 +7,7 @@ if (!$_SESSION['station']) {
 }
 
 $user = $_SESSION['station']['station_id'];
-$profile = mysqli_query($conn, "select * from employees");
+$profile = mysqli_query($conn, "SELECT * from employees");
 $fetch = mysqli_fetch_assoc($profile);
 
 ?>
