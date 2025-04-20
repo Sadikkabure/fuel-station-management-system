@@ -166,7 +166,7 @@ $fetch = mysqli_fetch_assoc($profile);
 
 
 
-          $sql = "Insert into station_expenses (
+          $sql = "  into station_expenses (
   station_id,
   expense_description,
   liter_amount,

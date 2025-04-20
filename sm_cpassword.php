@@ -205,7 +205,7 @@ if (isset($_POST['submit'])) {
           <div class="form-group">
             <label class="control-label col-sm-2" for="o_password">Old Password</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" required name="o_password" placeholder="Old Password">
+              <input type="password" class="form-control" required name="o_password" placeholder="Old Password">
             </div>
           </div>
 
@@ -214,7 +214,7 @@ if (isset($_POST['submit'])) {
           <div class="form-group">
             <label class="control-label col-sm-2" for="surname">New Password</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="password" required placeholder="New Password">
+              <input type="password" class="form-control" name="password" required placeholder="New Password">
             </div>
           </div>
 
@@ -224,7 +224,7 @@ if (isset($_POST['submit'])) {
           <div class="form-group">
             <label class="control-label col-sm-2" for="pass">Confirm Password</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="c_password" required placeholder="Confirm Password">
+              <input type="password" class="form-control" name="c_password" required placeholder="Confirm Password">
             </div>
           </div>
           <center> <input type="submit" class="btn btn-success" value="Change" name="submit"></center>
