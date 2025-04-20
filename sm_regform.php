@@ -109,7 +109,7 @@ $all_stations = mysqli_query($conn, $query);
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="admin_dashboard.php"><i class="fa fa-user"></i>Profile</a></li>
+      <li><a href="admin_dashboard.php"><i class="fa fa-user"></i>admin_dashboard</a></li>
             </ul>
           </li>
           <li class="treeview">

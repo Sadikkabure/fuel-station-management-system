@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
           <div class="pull-left info">
             <p>Station Manager </p>
 
-            <a href="#"> <?php echo "$fetch[station_id]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
+            <a href="#"> <?php echo "$fetch[surname]"; ?> <i class="fa fa-circle text-success"></i> Online </a>
           </div>
         </div>
         <form action="#" method="get" class="sidebar-form">

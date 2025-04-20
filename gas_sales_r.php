@@ -83,7 +83,7 @@ $fetch = mysqli_fetch_array($profile);
             <p>Station Manager </p>
 
             <a href="#">
-              <?php echo "$fetch[station_id]"; ?> <i class="fa fa-circle text-success"></i> Online
+              <?php echo "$fetch[surname]"; ?> <i class="fa fa-circle text-success"></i> Online
             </a>
           </div>
         </div>
