@@ -23,6 +23,7 @@ $fetch = mysqli_fetch_array($profile);
   <link rel="stylesheet" href="css/ionicons.min.css">
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <link rel="stylesheet" href="css/_all-skins.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -30,7 +31,7 @@ $fetch = mysqli_fetch_array($profile);
     <header class="main-header">
       <a href="admin_dashboard.php" class="logo">
         <span class="logo-mini"><b>KBY</b></span>
-        <span class="logo-lg"><b>Kaburiye & sons NIG LTD</b></span>
+        <span class="logo-lg"><b>Kaburiye & NIG LTD</b></span>
       </a>
       <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -41,7 +42,9 @@ $fetch = mysqli_fetch_array($profile);
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo "$fetch[email]"; ?></span>
+                <span class="hidden-xs">
+                  <?php echo "$fetch[email]"; ?>
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
@@ -182,11 +185,11 @@ $fetch = mysqli_fetch_array($profile);
           <li>
 
           <li>
-            <a href="m_report.php">
-              <i class="fa fa-files-o"></i> <span>Maintenance Report</span>
-              <span class="pull-right-container">
+            <!-- <a href="m_report.php">
+            <i class="fa fa-files-o"></i> <span>Maintenance Report</span> -->
+            <span class="pull-right-container">
 
-              </span>
+            </span>
             </a>
           </li>
           <li>
@@ -216,29 +219,30 @@ $fetch = mysqli_fetch_array($profile);
     </aside>
     <div class="content-wrapper">
       <section class="content">
-        <h2 align="center" style="color:black;"> Existing Tanker</h2>
+        <h2 align="center" style="color:black;"> Expenses Report</h2>
+
+
         <div class="table-responsive">
 
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="success">
-                <th> SN</th>
-                <th> Tanker Number </th>
-                <th> Driver name </th>
-                <th>Driver ID</th>
-                <th> Status </th>
-
-
-                <th>Edit</th>
-                <th>Delete</th>
+                <th> Station ID </th>
+                <th> dateofentry </th>
+                <th> quantity_received </th>
+                <th>status</th>
+                <th> tanker </th>
+                <th> product </th>
+                <th> quantitylifted </th>
+                <th> shortage </th>
+                 <th> driver_name </th>
 
               </tr>
             </thead>
 
 
             <?php
-            require __DIR__ . "/config/database.php";
-            $getRecords_string = "select * from tankers order by SN ";
+            $getRecords_string = "select * from arrival_entries order by entry_id ";
             $getRecord = mysqli_query($conn, $getRecords_string);
             $num_of_record = mysqli_num_rows($getRecord);
             if ($num_of_record > 0) {
@@ -246,21 +250,20 @@ $fetch = mysqli_fetch_array($profile);
 
                 echo '<tr>';
 
-                echo "<td class=''>$record[SN]</td>";
-                echo "<td class=''>$record[tanker_number]</td>";
-                echo "<td class=''>$record[driver_name]</td>";
-                echo "<td class=''>$record[employee_id]</td>";
+                echo "<td class=''>$record[station_id]</td>";
+                echo "<td class=''>$record[dateofentry]</td>";
+                echo "<td class=''>$record[quantity_received]</td>";
                 echo "<td class=''>$record[status]</td>";
-
-
-                echo '<td class=""><button class=" btn-success"><a href="tanker_edit.php?tanker_number=' . $record['tanker_number'] . '">EDIT </a></button></td>';
-                echo '<td class=""><button class="btn-danger "><a href="tanker_delete.php?tanker_number=' . $record['tanker_number'] . '">DELETE</a></button></td>';
-
+                echo "<td class=''>$record[tanker]</td>";
+                echo "<td class=''>$record[product]</td>";
+                echo "<td class=''>$record[quantitylifted]</td>";
+                echo "<td class=''>$record[shortage]</td>";
+                echo "<td class=''>$record[driver_name]</td>";
                 echo '</tr>';
               }
             } else {
-              #die(mysql_error($conn));
-              echo "<h6>Loading..........</h6>";
+              // die(mysql_error($conn));
+              echo "<h5>Loading..........</h5>";
             }
 
 
@@ -272,6 +275,7 @@ $fetch = mysqli_fetch_array($profile);
         </div>
 
 
+
       </section>
 
 
@@ -281,11 +285,8 @@ $fetch = mysqli_fetch_array($profile);
       <div class="pull-right hidden-xs">
 
       </div>
-      <div class="copyright-container">
-        <p class="copyright-text">
-          <strong>Copyright &copy; 2025 by KABURIYE & SONS NIG. LTD.</strong> All rights reserved.
-        </p>
-      </div>
+      <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
+      <button onclick="window.print()" class="print-btn">PRINT</button>
     </footer>
 
   </div>

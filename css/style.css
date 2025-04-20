@@ -1057,3 +1057,13 @@ form .alert {
   -webkit-animation-name: zoomIn;
   animation-name: zoomIn;
 }
+
+
+.copyright-container {
+  width: 50%;
+  max-width: 500px;
+  margin: auto;
+  padding: 15px;
+}
+
+.cop

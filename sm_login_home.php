@@ -2,12 +2,11 @@
 session_start();
 require __DIR__ . "/config/database.php";
 if (!$_SESSION['station']) {
-  header("Location:sm_logout.php");
+  header("Location:sm_login.php");
   die();
 }
-
 $user = $_SESSION['station']['station_id'];
-$profile = mysqli_query($conn, "SELECT * from employees");
+$profile = mysqli_query($conn, "SELECT * from station_manager where station_id='$user'");
 $fetch = mysqli_fetch_assoc($profile);
 
 ?>

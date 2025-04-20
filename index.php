@@ -123,8 +123,7 @@
       </div>
     </nav>
   </header>
-  <p style="font-size:70px; margin-top:13%; color:white; margin-left:20%"> <i>WELCOME TO KABURIYE & SONS NIG. LTD. <i />
-  </p>
+  <p style="font-size:70px; text-align:center; margin-top:300px; text-shadow: #000; color:white;"> <marquee behavior="" direction="rtl">WELCOME TO KABURIYE & SONS NIG. LTD.</marquee></p>
   </div>
 
   <section class="hero-section set-bg">
@@ -139,12 +138,14 @@
     <div class="container">
       <!-- Social Media Links -->
       <div class="mb-3">
-        <a href="#" class="text-white mx-2"><i class="fa fa-facebook-f"></i></a>
-        <a href="#" class="text-white mx-2"><i class="fa fa-instagram"></i></a>
-        <a href="#" class="text-white mx-2"><i class="fa fa-twitter"></i></a>
+        <a href="https://www.facebook.com/sadik.kabure" class="text-white mx-2"><i class="fa fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/sadik_kabure" class="text-white mx-2"><i class="fa fa-instagram"></i></a>
+        <a href="https://www.twitter.com/sadik_kabure" class="text-white mx-2"><i class="fa fa-twitter"></i></a>
         <a href="#" class="text-white mx-2"><i class="fa fa-google"></i></a>
-        <a href="#" class="text-white mx-2"><i class="fa fa-youtube"></i></a>
+        <a href="https://www.youtube.com/sadikdahiru255" class="text-white mx-2"><i class="fa fa-youtube"></i></a>
+
       </div>
+    
 
       <!-- Navigation Links -->
       <div class="mb-3">
@@ -157,7 +158,7 @@
 
       <!-- Copyright Notice -->
       <div>
-        <p class="mb-0">Copyright ©2022, Designed by Sadik_kabure & KabriAcid</p>
+        <p class="mb-0">Copyright ©2025, Designed by Sadik_kabure & KabriAcid</p>
       </div>
     </div>
   </footer>

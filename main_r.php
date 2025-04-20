@@ -5,9 +5,8 @@ if (!$_SESSION['maintenance']) {
   header("Location:mm_login.php");
   die();
 }
-require __DIR__ . "/config/database.php";
 $user = $_SESSION['maintenance'];
-$profile = mysqli_query($conn, "SELECT * from maintenance_manager where maintenancemanager_id ='$user'");
+$profile = mysqli_query($conn, "SELECT * from maintenance_manager where email ='$user'");
 $fetch = mysqli_fetch_assoc($profile);
 
 
@@ -45,7 +44,7 @@ $fetch = mysqli_fetch_assoc($profile);
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="images/admin.jpg" class="user-image" alt="User Image">
                 <span class="hidden-xs">
-                  <?php echo "$fetch[employee_name]"; ?>
+                  <?php echo "$fetch[email]"; ?>
                 </span>
               </a>
               <ul class="dropdown-menu">

@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
   $password = mysqli_real_escape_string($conn, $_POST['password']);
 
 
-  $query = "SELECT * FROM station_manager where station_id='$username' AND password='" . md5($password) . "'";
+  $query = "SELECT * FROM station_manager where email ='$username' AND password='" . md5($password) . "'";
   $result = mysqli_query($conn, $query);
   if ($user_data = mysqli_fetch_assoc($result)) {
     $_SESSION['station'] = $user_data;
@@ -117,7 +117,7 @@ if (isset($_POST['submit'])) {
               <form role="form" method="post" class="login-form">
                 <div class="form-group">
                   <label class="sr-only" for="form-username">Username</label>
-                  <input type="text" name="email" required placeholder="Station ID" class="form-username form-control" id="form-username">
+                  <input type="text" name="email" required placeholder="Email address" class="form-username form-control" id="form-username">
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="form-password">Password</label>

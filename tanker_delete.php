@@ -10,9 +10,9 @@ if (!isset($_GET['ID'])) {
     header("location:admin.php");
 }
 
-$sql = "DELETE FROM station_manager  where ID = '$_GET[ID]' ";
+$sql = "DELETE FROM tankers  where tanker_number ='$_GET[tanker_number]'";
 if (mysqli_query($conn, $sql)) {
-    header("location:profile_sm.php");
+    header("location: e_tanker.php");
 } else {
     echo "Loading............";
 }
