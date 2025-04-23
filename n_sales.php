@@ -217,9 +217,10 @@ VALUES('$s_id',
           <div class="form-group">
             <label class="control-label col-sm-2" for="StationID">Station ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" readonly name="s_id" value="<?php echo "$fetch[station_id]"; ?>">
+              <input type="text" class="form-control" readonly name="s_id" value="<?php echo $fetch['station_id']; ?>">
             </div>
           </div>
+          
 
 
           <script>

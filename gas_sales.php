@@ -268,7 +268,7 @@ $fetch = mysqli_fetch_assoc($profile);
           <div class="form-group">
             <label class="control-label col-sm-2" for="Available litres">Available Litres </label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="a_litre" required placeholder="Available Litres">
+              <input type="text" class="form-control" name="a_litre" required placeholder="Available Litres" >
             </div>
           </div>
 

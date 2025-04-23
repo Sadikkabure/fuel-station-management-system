@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2025 at 04:46 AM
+-- Generation Time: Apr 23, 2025 at 05:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,8 +64,9 @@ CREATE TABLE `arrival_entries` (
 --
 
 INSERT INTO `arrival_entries` (`entry_id`, `quantity_received`, `quantitylifted`, `station_id`, `status`, `dateofentry`, `product`, `tanker`, `shortage`, `driver_name`) VALUES
-(2, 369, 887, 'S002', 'Active', '2015-04-11 00:00:00', 'Keroseine', 'ABJ78YH9', 502, 'ABJ78YH9'),
-(3, 369, 906, 'S002', 'Active', '1985-09-17 00:00:00', 'Keroseine', 'ABJ09999', 75, 'ABJ09999');
+(2, -56, 887, 'S002', 'Active', '2015-04-11 00:00:00', 'Keroseine', 'ABJ78YH9', 502, 'ABJ78YH9'),
+(3, -56, 906, 'S002', 'Active', '1985-09-17 00:00:00', 'Keroseine', 'ABJ09999', 75, 'ABJ09999'),
+(4, 967, 328, 'S002', '', '1970-06-26 00:00:00', 'Gas', 'ABJ09999', -639, 'ABJ09999');
 
 -- --------------------------------------------------------
 
@@ -110,13 +111,13 @@ INSERT INTO `employees` (`SN`, `employee_id`, `surname`, `othername`, `role`, `s
 --
 
 CREATE TABLE `gas_sales` (
-  `SN` int(11) NOT NULL DEFAULT 0,
-  `station_id` int(11) NOT NULL,
-  `litre_sold` int(11) NOT NULL,
-  `litre_price` int(11) NOT NULL,
-  `total_sales` int(11) NOT NULL,
-  `available_litre` int(11) NOT NULL,
-  `date` int(11) NOT NULL
+  `SN` int(11) NOT NULL,
+  `station_id` varchar(100) NOT NULL,
+  `litre_sold` int(100) NOT NULL,
+  `litre_price` int(100) NOT NULL,
+  `total_sales` int(100) NOT NULL,
+  `available_litre` int(100) NOT NULL,
+  `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -124,7 +125,7 @@ CREATE TABLE `gas_sales` (
 --
 
 INSERT INTO `gas_sales` (`SN`, `station_id`, `litre_sold`, `litre_price`, `total_sales`, `available_litre`, `date`) VALUES
-(0, 0, 50, 230, 11500, 0, 1970);
+(1, 'S002', 222, 230, 51060, 1111, '1111-11-22 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -201,20 +202,21 @@ INSERT INTO `maintenance_manager` (`ID`, `maintenancemanager_id`, `surname`, `ot
 
 CREATE TABLE `petrol_sales` (
   `SN` int(11) NOT NULL,
-  `station_id` int(11) NOT NULL,
-  `litre_sold` int(11) NOT NULL,
-  `litre_price` int(11) NOT NULL,
-  `total_sales` int(11) NOT NULL,
-  `available_litre` int(11) NOT NULL,
-  `date` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `station_id` varchar(100) NOT NULL,
+  `litre_sold` int(100) NOT NULL,
+  `litre_price` int(100) NOT NULL,
+  `total_sales` int(100) NOT NULL,
+  `available_litre` int(100) NOT NULL,
+  `date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `petrol_sales`
 --
 
 INSERT INTO `petrol_sales` (`SN`, `station_id`, `litre_sold`, `litre_price`, `total_sales`, `available_litre`, `date`) VALUES
-(1, 0, 16, 148, 2368, 369, 1981);
+(1, 'S002', 243, 148, 35964, 31, '1979-11-23 00:00:00'),
+(2, 'S002', 87, 148, 12876, -56, '2012-08-06 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -355,6 +357,12 @@ ALTER TABLE `employees`
   ADD UNIQUE KEY `employee_id` (`employee_id`);
 
 --
+-- Indexes for table `gas_sales`
+--
+ALTER TABLE `gas_sales`
+  ADD PRIMARY KEY (`SN`);
+
+--
 -- Indexes for table `maintenance`
 --
 ALTER TABLE `maintenance`
@@ -417,13 +425,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `arrival_entries`
 --
 ALTER TABLE `arrival_entries`
-  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
   MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `gas_sales`
+--
+ALTER TABLE `gas_sales`
+  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `maintenance`
@@ -441,7 +455,7 @@ ALTER TABLE `maintenance_manager`
 -- AUTO_INCREMENT for table `petrol_sales`
 --
 ALTER TABLE `petrol_sales`
-  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `stations`
