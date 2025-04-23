@@ -168,11 +168,6 @@ $fetch = mysqli_fetch_assoc($profile);
       <section class="content">
         <h2 align="center" style="color:blue;"> Add Petrol Daily Sales Record</h2>
 
-
-
-
-
-
         <?php
         if (isset($_POST['register'])) {
           $s_id = mysqli_real_escape_string($conn, $_POST['s_id']);
@@ -200,16 +195,12 @@ VALUES('$s_id',
 
         mysqli_query($conn, "UPDATE arrival_entries SET quantity_received = '$a_litre' where station_id='$user' and status ='Active' and quantity_received > 0");
 
-
           if (mysqli_query($conn, $sql)) {
 
             $message = "Sales Record added Successfully...";
           } else {
             echo "ERROR: Review  the details  ";
           }
-
-
-          mysqli_close($conn);
         }
 
         ?>
@@ -253,7 +244,6 @@ VALUES('$s_id',
           </div>
 
           <?php
-          require __DIR__ . "/config/database.php";
           $getRecord = mysqli_query($conn, "select * from stations where station_id='$user'");
           $litre_price = mysqli_fetch_array($getRecord);
           ?>
@@ -285,8 +275,8 @@ VALUES('$s_id',
           <center> <input type="submit" class="btn btn-success" value="Register" name="register"></center>
 
           <?php
-          $getRecord = mysqli_query($conn, "select * from arrival_entries where station_id='$user' AND status = 'Active'");
-          $arrival = mysqli_fetch_array($getRecord);
+          $getRecord = mysqli_query($conn, "SELECT * from arrival_entries where station_id='$user' AND status = 'Active'");
+          $arrival = mysqli_fetch_assoc($getRecord);
           $x = "$arrival[quantity_received]";
 
           ?>

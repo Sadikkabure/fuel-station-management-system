@@ -306,10 +306,9 @@ VALUES(
             <div class="col-sm-10">
 
               <select name="sc" class="form-control" required>
-
                 <option value="NNPC">NNPC</option>
                 <option value="MRS"> MRS</option>
-                <option value="BUNGEL NIG LTD"> KABURIYE & SONS NIG LTD</option>
+                <option value="KABURIYE & SONS NIG LTD"> KABURIYE & SONS NIG LTD</option>
               </select>
             </div>
           </div>

@@ -15,7 +15,6 @@ if (isset($_POST['submit'])) {
         if ($user_no > 0) {
             $user_data = mysqli_fetch_assoc($user);
             $_SESSION['user'] = $user_data;
-            $_SESSION['maintenance'] = $email;
             header("location: mm_home.php");
             die();
         } else {

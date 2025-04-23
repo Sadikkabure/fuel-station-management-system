@@ -239,7 +239,6 @@ $fetch = mysqli_fetch_array($profile);
 
 
             <?php
-            require __DIR__ . "/config/database.php";
             $getRecords_string = "select * from maintenance order by SN ";
             $getRecord = mysqli_query($conn, $getRecords_string);
             $num_of_record = mysqli_num_rows($getRecord);

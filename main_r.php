@@ -1,15 +1,13 @@
 <?php
 session_start();
 require __DIR__ . "/config/database.php";
-if (!$_SESSION['maintenance']) {
+if (!$_SESSION['user']) {
   header("Location:mm_login.php");
   die();
 }
-$user = $_SESSION['maintenance'];
+$user = $_SESSION['user']['email'];
 $profile = mysqli_query($conn, "SELECT * from maintenance_manager where email ='$user'");
 $fetch = mysqli_fetch_assoc($profile);
-
-
 
 ?>
 <!DOCTYPE html>
@@ -151,8 +149,7 @@ $fetch = mysqli_fetch_assoc($profile);
 
 
             <?php
-            require __DIR__ . "/config/database.php";
-            $getRecords_string = "select * from maintenance where maintenancemanager_id = '$user' order by SN ";
+            $getRecords_string = "SELECT * from maintenance where email = '$user' order by SN ";
             $getRecord = mysqli_query($conn, $getRecords_string);
             $num_of_record = mysqli_num_rows($getRecord);
             if ($num_of_record > 0) {

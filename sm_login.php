@@ -3,11 +3,11 @@ session_start();
 require __DIR__ . "/config/database.php";
 
 if (isset($_POST['submit'])) {
-  $username = mysqli_real_escape_string($conn, $_POST['email']);
+  $email = mysqli_real_escape_string($conn, $_POST['email']);
   $password = mysqli_real_escape_string($conn, $_POST['password']);
 
 
-  $query = "SELECT * FROM station_manager where email ='$username' AND password='" . md5($password) . "'";
+  $query = "SELECT * FROM station_manager where email ='$email' AND password='" . md5($password) . "'";
   $result = mysqli_query($conn, $query);
   if ($user_data = mysqli_fetch_assoc($result)) {
     $_SESSION['station'] = $user_data;

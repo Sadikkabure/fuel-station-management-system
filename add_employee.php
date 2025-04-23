@@ -319,13 +319,11 @@ VALUES('$employee_id',
             <div class="col-sm-10">
 
               <select name="role" class="form-control" required>
-
-                <option>----Select Role----</option>
                 <option value="Security">Security</option>
                 <option value="Driver"> Driver</option>
                 <option value="Fuel Attendants"> Fuel Attendants</option>
-                <option value="Cleaner "> Cleaner</option>
-                <option value="Others "> Others</option>
+                <option value="Cleaner"> Cleaner</option>
+                <option value="Others"> Others</option>
               </select>
             </div>
           </div>
@@ -420,7 +418,6 @@ VALUES('$employee_id',
             <div class="col-sm-10">
 
               <select name="religion" class="form-control" required>
-                <option> ----Choose Religion----</option>
                 <option value="islam">Islam</option>
                 <option value="christianity"> Christianity</option>
                 <option value="others"> others</option>

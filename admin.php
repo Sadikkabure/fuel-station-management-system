@@ -1,8 +1,8 @@
 <?php
 session_start();
+require __DIR__ . "/config/database.php";
 
 if (isset($_POST['submit'])) {
-	require __DIR__ . "/config/database.php";
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$password = ($_POST['password']);
 	$password = mysqli_real_escape_string($conn, $password);

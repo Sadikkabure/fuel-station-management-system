@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2024 at 12:16 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Apr 23, 2025 at 04:46 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tukur`
+-- Database: `sadik`
 --
 
 -- --------------------------------------------------------
@@ -39,6 +39,33 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`SN`, `email`, `password`) VALUES
 (1, 'admin@gmail.com', '1122');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `arrival_entries`
+--
+
+CREATE TABLE `arrival_entries` (
+  `entry_id` int(11) NOT NULL,
+  `quantity_received` int(11) NOT NULL,
+  `quantitylifted` int(11) NOT NULL,
+  `station_id` varchar(11) NOT NULL,
+  `status` enum('Active','Inactive') NOT NULL,
+  `dateofentry` datetime NOT NULL,
+  `product` varchar(100) NOT NULL,
+  `tanker` varchar(100) NOT NULL,
+  `shortage` int(11) NOT NULL,
+  `driver_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `arrival_entries`
+--
+
+INSERT INTO `arrival_entries` (`entry_id`, `quantity_received`, `quantitylifted`, `station_id`, `status`, `dateofentry`, `product`, `tanker`, `shortage`, `driver_name`) VALUES
+(2, 369, 887, 'S002', 'Active', '2015-04-11 00:00:00', 'Keroseine', 'ABJ78YH9', 502, 'ABJ78YH9'),
+(3, 369, 906, 'S002', 'Active', '1985-09-17 00:00:00', 'Keroseine', 'ABJ09999', 75, 'ABJ09999');
 
 -- --------------------------------------------------------
 
@@ -73,7 +100,31 @@ INSERT INTO `employees` (`SN`, `employee_id`, `surname`, `othername`, `role`, `s
 (3, 'E003', 'Zainab', 'idii', 'Security', 'female', '30000', '048904009', 'No:6 nabi', 'zayny@gmail.com', '2022-05-25', 'islam', 'kaduna', 'kd north'),
 (4, 'E004', 'Abdul', 'Sani', 'Driver', 'male', '30000', '0903900920', 'No12: Gam', 'abdul@gmail.com', '2022-05-12', 'christianity', 'ebonyi', 'Gawu'),
 (6, 'E005', 'Aisha', 'saad', 'Driver', 'female', '200000', '09038399299', '7hdhdj', 'aisha@gmail.com', '2022-06-08', 'islam', 'bauchi', 'Ash'),
-(7, 'www', 'kk', 'm', 'Security', 'female', '88', '099', 'yy', 'bbb@bb.bb', '2024-06-01', 'islam', 'ekiti', ',,');
+(7, 'www', 'kk', 'm', 'Security', 'female', '88', '099', 'yy', 'bbb@bb.bb', '2024-06-01', 'islam', 'ekiti', ',,'),
+(10, '756', 'qyqegute', 'zivefuv', 'Others', 'male', 'Incidunt cupidatat ', '080582553284', 'Voluptas hic tempora', 'tekewev@mailinator.com', '2015-08-01', 'christianity', 'Ondo', 'Akure South');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gas_sales`
+--
+
+CREATE TABLE `gas_sales` (
+  `SN` int(11) NOT NULL DEFAULT 0,
+  `station_id` int(11) NOT NULL,
+  `litre_sold` int(11) NOT NULL,
+  `litre_price` int(11) NOT NULL,
+  `total_sales` int(11) NOT NULL,
+  `available_litre` int(11) NOT NULL,
+  `date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `gas_sales`
+--
+
+INSERT INTO `gas_sales` (`SN`, `station_id`, `litre_sold`, `litre_price`, `total_sales`, `available_litre`, `date`) VALUES
+(0, 0, 50, 230, 11500, 0, 1970);
 
 -- --------------------------------------------------------
 
@@ -83,6 +134,7 @@ INSERT INTO `employees` (`SN`, `employee_id`, `surname`, `othername`, `role`, `s
 
 CREATE TABLE `maintenance` (
   `SN` int(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `maintenancemanager_id` varchar(50) NOT NULL,
   `employee_name` varchar(60) NOT NULL,
   `date` varchar(15) NOT NULL,
@@ -97,12 +149,18 @@ CREATE TABLE `maintenance` (
 -- Dumping data for table `maintenance`
 --
 
-INSERT INTO `maintenance` (`SN`, `maintenancemanager_id`, `employee_name`, `date`, `car_number`, `problem`, `others`, `quantity`, `status`) VALUES
-(1, 'MM001', 'Jerry', '2022-05-27', 'Ty09kn', 'tires', 'nill', 0, 'Bad'),
-(2, 'MM001', 'John', '2022-05-18', 'TY77g', 'Tires', 'Oil', 0, 'Bad'),
-(3, 'MM001', 'John', '2022-06-05', 'Tyr55lk', '---Select---', 'Nil', 1, 'In-Maintenance'),
-(4, 'MM001', 'John', '2022-06-10', 'nil', '', 'Nil', 2, 'Good'),
-(5, 'MM001', 'John', '2022-06-03', 'e', 'Engine', 'gg', 2, 'Good');
+INSERT INTO `maintenance` (`SN`, `email`, `maintenancemanager_id`, `employee_name`, `date`, `car_number`, `problem`, `others`, `quantity`, `status`) VALUES
+(1, 'acid@gmail.com', 'MM001', 'Jerry', '2022-05-27', 'Ty09kn', 'tires', 'nill', 0, 'Bad'),
+(2, '', 'MM001', 'John', '2022-05-18', 'TY77g', 'Tires', 'Oil', 0, 'Bad'),
+(3, '', 'MM001', 'John', '2022-06-05', 'Tyr55lk', '---Select---', 'Nil', 1, 'In-Maintenance'),
+(4, '', 'MM001', 'John', '2022-06-10', 'nil', '', 'Nil', 2, 'Good'),
+(5, '', 'MM001', 'John', '2022-06-03', 'e', 'Engine', 'gg', 2, 'Good'),
+(6, '', '139', 'Zainab', '1993-03-27', 'Non omnis possimus ', 'Engine', 'Aliquid odit nobis v', 650, 'In-Maintenance'),
+(7, '', '806', 'John', '2023-12-05', 'Asperiores adipisici', 'Tires', 'Voluptatem quam cons', 194, 'Bad'),
+(8, '', '806', 'Aisha', '1974-09-25', 'Pariatur Voluptatem', 'Pump', 'Nesciunt suscipit q', 823, 'Good'),
+(9, '', '806', 'Abdul', '1984-06-24', 'Sit molestiae esse ', 'Engine Oil', 'A sit deserunt enim', 836, 'Good'),
+(10, '', '806', 'Zainab', '1990-03-13', 'Iusto et voluptate q', 'Driving Shaft', 'Non aute sapiente ut', 895, 'Bad'),
+(11, '', '806', 'Zainab', '1990-03-13', 'Iusto et voluptate q', 'Driving Shaft', 'Non aute sapiente ut', 895, 'Bad');
 
 -- --------------------------------------------------------
 
@@ -131,7 +189,9 @@ CREATE TABLE `maintenance_manager` (
 
 INSERT INTO `maintenance_manager` (`ID`, `maintenancemanager_id`, `surname`, `othername`, `sex`, `dob`, `state_origin`, `local`, `religion`, `phonenumber`, `email`, `password`) VALUES
 (1, 'MM001', 'Muhammed', 'Isa', 'male', '2022-05-11', 'bauchi', 'Local', 'islam', '09490050', 'isa@gmail.com', 'b59c67bf196a4758191e42f76670ceba'),
-(2, 'mm', 'kk', 'yy', 'male', '2024-05-15', 'delta', ',,', 'islam', '00', 'yusufsaiduabdullahi2020@gmail.com', 'kk');
+(2, 'mm', 'kk', 'yy', 'male', '2024-05-15', 'delta', ',,', 'islam', '00', 'yusufsaiduabdullahi2020@gmail.com', 'kk'),
+(3, '139', 'tukara', 'gigikig', 'male', '2008-09-14', 'Ekiti', 'Gbonyin', 'others', '080985918615', 'sadik@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(4, '806', 'hyfumal', 'luqoz', 'female', '1978-10-07', 'Ogun', 'Imeko Afon', 'islam', '080682631266', 'acid@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055');
 
 -- --------------------------------------------------------
 
@@ -142,12 +202,19 @@ INSERT INTO `maintenance_manager` (`ID`, `maintenancemanager_id`, `surname`, `ot
 CREATE TABLE `petrol_sales` (
   `SN` int(11) NOT NULL,
   `station_id` int(11) NOT NULL,
-  `litre_sold,` int(11) NOT NULL,
+  `litre_sold` int(11) NOT NULL,
   `litre_price` int(11) NOT NULL,
   `total_sales` int(11) NOT NULL,
   `available_litre` int(11) NOT NULL,
   `date` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `petrol_sales`
+--
+
+INSERT INTO `petrol_sales` (`SN`, `station_id`, `litre_sold`, `litre_price`, `total_sales`, `available_litre`, `date`) VALUES
+(1, 0, 16, 148, 2368, 369, 1981);
 
 -- --------------------------------------------------------
 
@@ -162,7 +229,6 @@ CREATE TABLE `stations` (
   `petrol_price` double NOT NULL,
   `gas_price` double NOT NULL,
   `station_category` varchar(45) NOT NULL,
-  `password` varchar(50) NOT NULL,
   `trn_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -170,11 +236,11 @@ CREATE TABLE `stations` (
 -- Dumping data for table `stations`
 --
 
-INSERT INTO `stations` (`SN`, `station_id`, `address`, `petrol_price`, `gas_price`, `station_category`, `password`, `trn_date`) VALUES
-(5, '11', 'gb', 0, 0, 'NNPC', '2a38a4a9316c49e5a833517c45d31070', '2024-05-17 05:53:03'),
-(1, 'S001', 'Abuja', 145, 230, 'NNPC', 'b59c67bf196a4758191e42f76670ceba', '2022-05-28 03:47:19'),
-(2, 'S002', 'Yola', 148, 230, 'MRS', '934b535800b1cba8f96a5d72f72f1611', '2022-05-28 03:47:44'),
-(4, 'S004', 'Jigsaw', 200, 278, 'TUKUR NIG LTD', 'dbc4d84bfcfe2284ba11beffb853a8c4', '2022-06-06 03:50:16');
+INSERT INTO `stations` (`SN`, `station_id`, `address`, `petrol_price`, `gas_price`, `station_category`, `trn_date`) VALUES
+(5, '11', 'gb', 0, 0, 'NNPC', '2024-05-17 05:53:03'),
+(8, 'ACID', 'Numan', 200, 400, 'BUNGEL NIG LTD', '2025-04-23 03:54:39'),
+(2, 'S002', 'Yola', 148, 230, 'MRS', '2022-05-28 03:47:44'),
+(1, 'sadik@gmail.com', 'Abuja', 145, 230, 'NNPC', '2022-05-28 03:47:19');
 
 -- --------------------------------------------------------
 
@@ -206,7 +272,8 @@ INSERT INTO `station_expenses` (`expense_id`, `station_id`, `expense_description
 (6, 'S001', '222', '23', '230', '5290', '2022-05-10', 'Gas'),
 (7, 'Admin', 'Ge', '23', '145', '45667', '2022-06-15', 'Gas'),
 (8, 'S002', 'ohh', '30', '230', '6900', '2022-06-08', 'Gas'),
-(9, 'S002', '988', '8990', '230', 'NaN', '2022-06-08', 'Gas');
+(9, 'S002', '988', '8990', '230', 'NaN', '2022-06-08', 'Gas'),
+(10, 'S002', 'Officia accusamus fu', '28', '230', '6440', '1971-07-01', 'Gas');
 
 -- --------------------------------------------------------
 
@@ -226,18 +293,18 @@ CREATE TABLE `station_manager` (
   `local_government` varchar(60) NOT NULL,
   `religion` varchar(15) NOT NULL,
   `phonenumber` varchar(16) NOT NULL,
-  `email` varchar(70) NOT NULL
+  `email` varchar(70) NOT NULL,
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `station_manager`
 --
 
-INSERT INTO `station_manager` (`ID`, `employee_id`, `station_id`, `surname`, `othername`, `sex`, `dob`, `state_origin`, `local_government`, `religion`, `phonenumber`, `email`) VALUES
-(1, 'SM001', 'S001', 'Idris', 'Umar Bungel', 'male', '2022-05-11', 'Adamawa', 'Yola North', 'islam', '08095904904', 'idris3686@bazeuniversity.edu.ng'),
-(2, 'SM002', 'S002', 'Zara', 'Usman', 'female', '2022-05-19', 'taraba', 'Jenge', 'islam', '0805950059', 'zara@gmail.com'),
-(5, 'SM003', 'S003', 'Sakina', 'Umar', 'female', '2022-06-14', 'Adamawa', 'Mubi', 'islam', '090938399392', 'sakina@gmail.com'),
-(8, 'www', 'S004', 'e', 'd', 'female', '2024-05-24', 'delta', ',,', 'islam', 'ee', 'yusufsaiduabdullahi2020@gmail.com');
+INSERT INTO `station_manager` (`ID`, `employee_id`, `station_id`, `surname`, `othername`, `sex`, `dob`, `state_origin`, `local_government`, `religion`, `phonenumber`, `email`, `password`) VALUES
+(2, 'SM002', 'S002', 'Zara', 'Usman', 'female', '2022-05-19', 'taraba', 'Jenge', 'islam', '0805950059', 'zara@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(5, 'SM003', 'S003', 'Sakina', 'Umar', 'female', '2022-06-14', 'Adamawa', 'Mubi', 'islam', '090938399392', 'sakina@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(9, '487', 'ACID', 'Kabri', 'Acid', 'male', '2012-09-07', 'Gombe', 'Akko', 'islam', '080594674743', 'kabriacid@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055');
 
 -- --------------------------------------------------------
 
@@ -273,6 +340,12 @@ INSERT INTO `tankers` (`SN`, `driver_name`, `tanker_number`, `status`, `employee
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`SN`);
+
+--
+-- Indexes for table `arrival_entries`
+--
+ALTER TABLE `arrival_entries`
+  ADD PRIMARY KEY (`entry_id`);
 
 --
 -- Indexes for table `employees`
@@ -341,52 +414,58 @@ ALTER TABLE `admin`
   MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `arrival_entries`
+--
+ALTER TABLE `arrival_entries`
+  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `maintenance`
 --
 ALTER TABLE `maintenance`
-  MODIFY `SN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `SN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `maintenance_manager`
 --
 ALTER TABLE `maintenance_manager`
-  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `petrol_sales`
 --
 ALTER TABLE `petrol_sales`
-  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `stations`
 --
 ALTER TABLE `stations`
-  MODIFY `SN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `SN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `station_expenses`
 --
 ALTER TABLE `station_expenses`
-  MODIFY `expense_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `expense_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `station_manager`
 --
 ALTER TABLE `station_manager`
-  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tankers`
 --
 ALTER TABLE `tankers`
-  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `SN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
