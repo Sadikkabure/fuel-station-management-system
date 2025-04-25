@@ -278,8 +278,7 @@ VALUES('$s_id',
           <?php
           $getRecord = mysqli_query($conn, "SELECT * from arrival_entries where station_id='$user' AND status = 'Active'");
           $arrival = mysqli_fetch_assoc($getRecord);
-          $x = "$arrival[quantity_received]";
-
+          $x = "$arrival[quantity_received]"; 
           ?>
 
 
