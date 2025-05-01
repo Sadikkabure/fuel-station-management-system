@@ -233,7 +233,7 @@ error_reporting(E_ALL);
           $status = mysqli_real_escape_string($conn, $_POST['status']);
           $e_id = mysqli_real_escape_string($conn, $_POST['eid']);
 
-          $sql = "Insert into tankers(
+          $sql = "INSERT into tankers(
   tanker_number,
   driver_name,
   status,
@@ -293,15 +293,15 @@ VALUES('$t_number',
           <div class="form-group">
             <label class="control-label col-sm-2" for="log">Driver Name</label>
             <div class="col-sm-10">
-              <select name="dname" id="drivername" class="form-control" onchange="GetDetail(this.value)" value="">
+              <select name="dname" id="drivername" class="form-control"  onchange="GetDetail(this.value)" value="">
                 <?php
 
                 while ($driv = mysqli_fetch_array($drivers, MYSQLI_ASSOC)):;
                 ?>
 
-                  <option value="<?php echo $driv["employee_id"]; ?>">
+                  <option value="<?php echo $driv ["employee_id"]; ?>">
 
-                    <?php echo $driv["surname"];
+                    <?php echo $driv ["surname"];
                     ?>
 
                   </option>

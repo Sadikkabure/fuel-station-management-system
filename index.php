@@ -132,7 +132,7 @@
       </div>
     </nav>
   </header>
-  <p style="font-size:70px; text-align:center; margin-top:300px; text-shadow: #000; color:white;"> <marquee behavior="" direction="rtl">WELCOME TO KABURIYE & SONS NIG. LTD.</marquee></p>
+  <p style="font-size:70px; text-align:center; margin-top:300px; text-shadow: #000; color:blue;"> <marquee behavior="" direction="rtl">WELCOME TO KABURIYE & SONS NIG. LTD.</marquee></p>
   </div>
 
   <section class="hero-section set-bg">
@@ -158,16 +158,16 @@
 
       <!-- Navigation Links -->
       <div class="mb-3">
-        <a href="#" class="text-white mx-2">Home</a>
+        <a href= admin.php class="text-white mx-2">Home</a>
         <a href="#" class="text-white mx-2">News</a>
-        <a href="#" class="text-white mx-2">About</a>
+        <a href=about.php class="text-white mx-2">About</a>
         <a href="#" class="text-white mx-2">Contact Us</a>
         <a href="#" class="text-white mx-2">Our Team</a>
       </div>
 
       <!-- Copyright Notice -->
       <div>
-        <p class="mb-0">Copyright ©2025, Designed by Sadik_kabure & KabriAcid</p>
+        <h6 class="mb-0">Copyright ©2025, Designed by Sadik_kabure & KabriAcid</h6>
       </div>
     </div>
   </footer>

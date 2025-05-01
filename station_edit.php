@@ -14,6 +14,7 @@ if (!isset($_GET['station_id'])) {
 
 if (isset($_POST['insert'])) {
   $station_id = mysqli_real_escape_string($conn, $_POST['station_id']);
+  $station_name = mysqli_real_escape_string($conn, $_POST['station_name']);
   $address = mysqli_real_escape_string($conn, $_POST['address']);
   $station_category = mysqli_real_escape_string($conn, $_POST['station_category']);
   $petrol_price = mysqli_real_escape_string($conn, $_POST['petrol_price']);
@@ -23,6 +24,7 @@ if (isset($_POST['insert'])) {
   mysqli_query($conn, "
                
         Update stations  set station_id='$station_id',
+        station_name='$station_name',
         address='$address',
         petrol_price='$petrol_price',
         gas_price='$gas_price',
@@ -274,6 +276,13 @@ $fetch = mysqli_fetch_array($profile);
               value="<?php echo $user_information['station_id'] ?>" />
           </div>
 
+          <div class="form-group">
+            <label for="newstitle"><b>Station Name</b></label>
+            <input type="text" name="station_name" required class="form-control"
+              value="<?php echo $user_information['station_name'] ?>" />
+          </div>
+
+
 
 
 
@@ -304,7 +313,10 @@ $fetch = mysqli_fetch_array($profile);
 
               <option value="NNPC">NNPC</option>
               <option value="MRS"> MRS</option>
-              <option value="BUNGEL NIG LTD"> BUNGEL NIG LTD</option>
+              <option value="INDEPENDENT"> INDEPENDENT</option>
+                <option value="TOTAL"> TOTAL</option>
+                <option value="CONOIL"> CONOIL</option>
+                <option value="KABURIYE & SONS NIG LTD"> KABURIYE & SONS NIG LTD</option>
             </select>
 
           </div>

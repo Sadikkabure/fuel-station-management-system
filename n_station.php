@@ -227,6 +227,7 @@ $fetch = mysqli_fetch_array($profile);
         <?php
         if (isset($_POST['register'])) {
           $t_number = mysqli_real_escape_string($conn, $_POST['tnumber']);
+          $s_name = mysqli_real_escape_string($conn, $_POST['sname']);
           $d_name = mysqli_real_escape_string($conn, $_POST['dname']);
           $e_id = mysqli_real_escape_string($conn, $_POST['eid']);
           $gas = mysqli_real_escape_string($conn, $_POST['gas']);
@@ -235,6 +236,7 @@ $fetch = mysqli_fetch_array($profile);
 
           $sql = "Insert into stations(
   station_id,
+  station_name,
   address,
   petrol_price,
   gas_price,
@@ -243,6 +245,7 @@ $fetch = mysqli_fetch_array($profile);
 
 VALUES(
   '$t_number',
+  '$s_name',
   '$d_name',
   '$e_id',
   '$gas',
@@ -278,6 +281,14 @@ VALUES(
             </div>
           </div>
 
+           <div class="form-group">
+            <label class="control-label col-sm-2" for="othername">Station Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="sname" required placeholder="Station Name">
+            </div>
+          </div>
+
+
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="othername">Address</label>
@@ -308,6 +319,9 @@ VALUES(
               <select name="sc" class="form-control" required>
                 <option value="NNPC">NNPC</option>
                 <option value="MRS"> MRS</option>
+                <option value="INDEPENDENT"> INDEPENDENT</option>
+                <option value="TOTAL"> TOTAL</option>
+                <option value="CONOIL"> CONOIL</option>
                 <option value="KABURIYE & SONS NIG LTD"> KABURIYE & SONS NIG LTD</option>
               </select>
             </div>

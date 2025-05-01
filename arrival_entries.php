@@ -260,7 +260,7 @@ VALUES('$entry_id',
                 while ($driv = mysqli_fetch_array($tank, MYSQLI_ASSOC)):;
                 ?>
 
-                  <option value="<?php echo $driv["tanker_number"]; ?>">
+                  <option value="<?php echo $driv["driver_name"]; ?>">
 
                     <?php echo $driv["driver_name"];
                     ?></option>
