@@ -284,6 +284,7 @@ $fetch = mysqli_fetch_assoc($profile);
 
       </div>
       <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
+       <button onclick="window.print()">PRINT</button>
     </footer>
 
   </div>

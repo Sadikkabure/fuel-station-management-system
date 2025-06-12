@@ -285,7 +285,7 @@ $fetch = mysqli_fetch_array($profile);
 
         </div>
         <center> <strong>Copyright &copy; 2025 by kaburiye & sons nig ltd</strong> All rights reserved.</center>
-        <button onclick="window.print()">PRINT</button>
+             <button onclick="window.print()">PRINT</button>
       </footer>
   </div>
 
